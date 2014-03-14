@@ -3,8 +3,6 @@
 
 int main(int argc, char **argv)
 {
-	char	*line;
-
 	if (argc > 1)
 		return (ft_error(argv[0]));
 	ft_putendl("~~ Hum ಠ_ಠ ~~\n");
