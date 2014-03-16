@@ -4,5 +4,5 @@
 Libft :
   A compiler avec la lib : https://github.com/FrenzyJay/libft
 
-test
+http://fr.openclassrooms.com/informatique/cours/gerez-vos-codes-source-avec-git/travailler-avec-des-branches
 
