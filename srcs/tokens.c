@@ -6,11 +6,12 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 07:13:19 by garm              #+#    #+#             */
-/*   Updated: 2014/03/16 09:08:51 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/16 13:47:17 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 #include "parser.h"
 
 static void			ft_set_tokval(t_tokval *tokval, t_tok token, char *value)
@@ -50,5 +51,54 @@ static void			ft_del_tokvals(t_tokval ***tokvals)
 	}
 }
 
+int				ft_is_tok(char *entry)
+{
+	t_tokval	**tvals;
+	int			i;
+	int			ret;
 
+	if (!entry || !*entry)
+		return (0);
+	if (entry[0] == ' ' || entry[0] == '\t')
+		return (ft_getsize_separator(entry));
+	tvals = ft_get_tokvals();
+	i = 0;
+	while (i < NB_TOKVALS)
+	{
+		if (ft_strncmp(entry, tvals[i]->value, ft_strlen(tvals[i]->value)) == 0)
+		{
+			ret = ft_strlen(tvals[i]->value);
+			ft_del_tokvals(&tvals);
+			return (ret);
+		}
+		i++;
+	}
+	ft_del_tokvals(&tvals);
+	return (0);
+}
+
+t_tok	ft_get_token(char *tval)
+{
+	t_tokval	**tvals;
+	int			i;
+	t_tok		ret;
+
+	tvals = ft_get_tokvals();
+	i = 0;
+	while (i < NB_TOKVALS)
+	{
+		if (ft_strncmp(tval, tvals[i]->value, ft_strlen(tvals[i]->value)) == 0)
+		{
+			ret = tvals[i]->token;
+			ft_del_tokvals(&tvals);
+			return (ret);
+		}
+		i++;
+	}
+	ft_del_tokvals(&tvals);
+	if (ft_is_uncompleted(tval))
+		return (ret = TOK_UNCOMPLETED);
+	else
+		return (ret = TOK_EXPR);
+}
 

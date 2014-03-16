@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 01:12:39 by garm              #+#    #+#             */
-/*   Updated: 2014/03/16 09:58:32 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/16 13:40:47 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define PARSER_H
 
 # define NB_TOKVALS 11
+# define FT_ISQUOTE(C) (C == '\'' || C == '"' || C == '`')
 
 typedef enum	e_tok
 {
 	TOK_UNCOMPLETED,
+	TOK_EXPR,
 	TOK_CMD,
 	TOK_ARG,
 	TOK_SEPARATOR,
@@ -65,12 +67,13 @@ t_lex	*ft_lexer(char *entry, t_lex *lextable, t_lex *prev_tok);
 ** tokens.c
 */
 int		ft_is_tok(char *entry);
-t_tok	ft_get_token(char *tokval);
+t_tok	ft_get_token(char *tval);
 
 /*
 ** tokens_utils.c
 */
 int		ft_getsize_separator(char *entry);
+int		ft_is_uncompleted(char *value);
 
 #endif /* !PARSER_H */
 
