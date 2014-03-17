@@ -6,7 +6,7 @@
 #    By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 18:33:50 by jvincent          #+#    #+#              #
-#    Updated: 2014/02/16 17:29:09 by jvincent         ###   ########.fr        #
+#    Updated: 2014/03/17 16:54:12 by jvincent         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -20,7 +20,8 @@ LDFLAGS = 		-L libft -lft
 INCLUDE_LIB = 	libft/includes
 LIB = 			libft
 SRCS = 			srcs/main.c \
-				srcs/exec.c
+				srcs/ft_exec.c \
+				srcs/ft_env.c
 OBJ = 			$(SRCS:.c=.o)
 
 all: $(NAME)
