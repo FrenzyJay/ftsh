@@ -6,12 +6,12 @@
 #    By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 18:33:50 by jvincent          #+#    #+#              #
-#    Updated: 2014/03/17 16:54:12 by jvincent         ###   ########.fr        #
+#    Updated: 2014/03/17 18:23:38 by jvincent         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 CC = 			cc
-NAME = 			42sh
+NAME = 			ftsh
 CFLAGS = 		-Wall -Werror -Wextra -g
 CFLAGS +=		-I./includes \
 				-I./libft/includes \
