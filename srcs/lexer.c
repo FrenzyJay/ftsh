@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 06:03:16 by garm              #+#    #+#             */
-/*   Updated: 2014/03/18 12:59:46 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/18 13:18:30 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,28 @@ void			ft_lex_destroy(t_lex **lex)
 static int		ft_search_until_token(char *entry)
 {
 	int		i;
+	int		parenth;
 	char	quote;
 
 	if ((i = ft_is_tok(entry)) > 0)
 		return (i);
 	i = 0;
+	parenth = 0;
 	quote = 0;
 	while (entry && entry[i])
 	{
-		if (quote == 0 && ft_is_tok(entry + i))
+		if (quote == 0 && ft_is_tok(entry + i) && !parenth)
 			return (i);
-		if (entry[i] == '\\')
+		if (entry[i] == '\\' && !parenth)
 			i++;
-		else if ((FT_ISQUOTE(entry[i]) || entry[i] == '(') && quote == 0)
+		else if ((FT_ISQUOTE(entry[i])) && quote == 0 && !parenth)
 			quote = entry[i];
-		else if ((FT_ISQUOTE(entry[i]) || entry[i] == ')') && quote != 0)
+		else if ((FT_ISQUOTE(entry[i])) && quote != 0 && !parenth)
 			quote = 0;
+		else if (entry[i] == '(')
+			parenth++;
+		else if (entry[i] == ')')
+			parenth--;
 		i++;
 	}
 	return (i);
