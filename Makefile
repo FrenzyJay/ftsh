@@ -6,13 +6,19 @@
 #    By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 18:33:50 by jvincent          #+#    #+#              #
-#    Updated: 2014/03/16 13:46:47 by garm             ###   ########.fr        #
+#    Updated: 2014/03/18 09:27:58 by garm             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-CC =			cc
+CC =			gcc
 NAME =			42sh
-CFLAGS =		-Wall -Werror -Wextra -g
+
+ifeq ($(DEBUG), 1)
+	FLAGS =	-g -Wall -Wextra -pedantic
+	CC = cc
+else
+	FLAGS =	-Wall -Werror -Wextra -pedantic
+endif
 
 CFLAGS +=		-I./includes \
 				-I./libft/includes \
@@ -34,11 +40,11 @@ OBJ =			$(SRCS:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	@$(CC) -o $@ -c $< $(CFLAGS)
+	@$(CC) -o $@ -c $< $(CFLAGS) $(FLAGS)
 
 $(NAME): $(OBJ)
 	@make -sC libft
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS)
+	@$(CC) $(CFLAGS) $(FLAGS) -o $(NAME) $(OBJ) $(LDFLAGS)
 	@echo $(NAME) ok
 
 clean:

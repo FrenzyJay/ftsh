@@ -6,49 +6,58 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 07:13:19 by garm              #+#    #+#             */
-/*   Updated: 2014/03/18 02:55:50 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/18 10:11:54 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "42sh.h"
 
-static void			ft_set_tokval(t_tokval *tokval, t_tok token, char *value)
+static t_tokval		*ft_set_tokval(t_tok token, char *value)
 {
-	if (tokval)
-	{
-		tokval->token = token;
-		tokval->value = value;
-	}
+	t_tokval	*new_tokval;
+
+	new_tokval = (t_tokval *)malloc(sizeof(t_tokval));
+	new_tokval->token = token;
+	new_tokval->value = value;
+	return (new_tokval);
 }
 
 static t_tokval		**ft_get_tokvals(void)
 {
 	t_tokval	**tokvals;
 
-	tokvals = (t_tokval **)malloc(sizeof(void *) * NB_TOKVALS);
-	ft_set_tokval(tokvals[0], TOK_HEREDOC, "<<");
-	ft_set_tokval(tokvals[1], TOK_APPEND, ">>");
-	ft_set_tokval(tokvals[2], TOK_AND, "&&");
-	ft_set_tokval(tokvals[3], TOK_OR, "||");
-	ft_set_tokval(tokvals[4], TOK_SEPARATOR, " ");
-	ft_set_tokval(tokvals[5], TOK_SEPARATOR, "\t");
-	ft_set_tokval(tokvals[6], TOK_READ, "<");
-	ft_set_tokval(tokvals[7], TOK_WRITE, ">");
-	ft_set_tokval(tokvals[8], TOK_PIPE, "|");
-	ft_set_tokval(tokvals[9], TOK_END, ";");
-	ft_set_tokval(tokvals[10], TOK_END, "\n");
-	ft_set_tokval(tokvals[11], TOK_END, "&");
+	tokvals = (t_tokval **)malloc(sizeof(t_tokval *) * NB_TOKVALS);
+	tokvals[0] = ft_set_tokval(TOK_HEREDOC, "<<");
+	tokvals[1] = ft_set_tokval(TOK_APPEND, ">>");
+	tokvals[2] = ft_set_tokval(TOK_AND, "&&");
+	tokvals[3] = ft_set_tokval(TOK_OR, "||");
+	tokvals[4] = ft_set_tokval(TOK_SEPARATOR, " ");
+	tokvals[5] = ft_set_tokval(TOK_SEPARATOR, "\t");
+	tokvals[6] = ft_set_tokval(TOK_READ, "<");
+	tokvals[7] = ft_set_tokval(TOK_WRITE, ">");
+	tokvals[8] = ft_set_tokval(TOK_PIPE, "|");
+	tokvals[9] = ft_set_tokval(TOK_END, ";");
+	tokvals[10] = ft_set_tokval(TOK_END, "\n");
+	tokvals[11] = ft_set_tokval(TOK_BG, "&");
 	return (tokvals);
 }
 
 static void			ft_del_tokvals(t_tokval ***tokvals)
 {
-	if (*tokvals)
+	int		i;
+
+	i = 0;
+	ft_putendl("DELETE ALL");
+	while (i < NB_TOKVALS)
 	{
-		free((void *)*tokvals);
-		*tokvals = NULL;
+		printf("%s\n", (**tokvals + i)->value);
+		if (**tokvals + i)
+			free(**tokvals + i);
+		i++;
 	}
+	free(*tokvals);
 }
 
 int				ft_is_tok(char *entry)
