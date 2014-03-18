@@ -6,15 +6,19 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 01:12:39 by garm              #+#    #+#             */
-/*   Updated: 2014/03/16 13:40:47 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/18 06:03:07 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# define NB_TOKVALS 11
+# define NB_TOKVALS 12
 # define FT_ISQUOTE(C) (C == '\'' || C == '"' || C == '`')
+
+# define TOK_IS_LEFT_RE(T) (T == TOK_READ || T == TOK_HEREDOC)
+# define TOK_IS_RIGHT_RE(T) (T == TOK_WRITE || T == TOK_APPEND)
+# define FT_TOK_IS_REDIRECTION(T) (TOK_IS_LEFT_RE(T) || TOK_IS_RIGHT_RE(T))
 
 typedef enum	e_tok
 {
@@ -32,7 +36,8 @@ typedef enum	e_tok
 	TOK_OR,
 	TOK_SUBSH,
 	TOK_BQUOTE,
-	TOK_END
+	TOK_END,
+	TOK_BG
 }				t_tok;
 
 typedef struct s_tokval
@@ -43,8 +48,8 @@ typedef struct s_tokval
 
 typedef struct	s_lex
 {
-	struct s_lex	*left;
-	struct s_lex	*right;
+	struct s_lex	*prev;
+	struct s_lex	*next;
 	t_tok			token;
 	char			*value;
 }				t_lex;
@@ -61,13 +66,16 @@ typedef struct	s_node
 /*
 ** lexer.c
 */
-t_lex	*ft_lexer(char *entry, t_lex *lextable, t_lex *prev_tok);
+char	*ft_strsuck(char **str, unsigned long len);
+t_lex	*ft_lex_push(t_lex *lex, t_tok token, char *value);
+void	ft_lex_destroy(t_lex **lex);
+t_lex	*ft_lexer(char *entry, t_lex *lextable);
 
 /*
 ** tokens.c
 */
 int		ft_is_tok(char *entry);
-t_tok	ft_get_token(char *tval);
+t_tok	ft_get_tok(char *tval);
 
 /*
 ** tokens_utils.c

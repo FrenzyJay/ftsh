@@ -6,13 +6,12 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 07:13:19 by garm              #+#    #+#             */
-/*   Updated: 2014/03/16 13:47:17 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/18 02:55:50 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft.h"
-#include "parser.h"
+#include "42sh.h"
 
 static void			ft_set_tokval(t_tokval *tokval, t_tok token, char *value)
 {
@@ -39,6 +38,7 @@ static t_tokval		**ft_get_tokvals(void)
 	ft_set_tokval(tokvals[8], TOK_PIPE, "|");
 	ft_set_tokval(tokvals[9], TOK_END, ";");
 	ft_set_tokval(tokvals[10], TOK_END, "\n");
+	ft_set_tokval(tokvals[11], TOK_END, "&");
 	return (tokvals);
 }
 
@@ -77,7 +77,7 @@ int				ft_is_tok(char *entry)
 	return (0);
 }
 
-t_tok	ft_get_token(char *tval)
+t_tok	ft_get_tok(char *tval)
 {
 	t_tokval	**tvals;
 	int			i;
