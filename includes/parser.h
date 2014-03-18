@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 01:12:39 by garm              #+#    #+#             */
-/*   Updated: 2014/03/18 13:25:21 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/18 14:46:39 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # define NB_TOKVALS 12
+# define NB_TOKENS 16
 # define FT_ISQUOTE(C) (C == '\'' || C == '"' || C == '`')
 
 # define TOK_IS_LEFT_RE(T) (T == TOK_READ || T == TOK_HEREDOC)
