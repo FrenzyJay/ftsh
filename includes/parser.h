@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 01:12:39 by garm              #+#    #+#             */
-/*   Updated: 2014/03/18 06:03:07 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/18 12:38:23 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,13 @@ t_lex	*ft_lexer(char *entry, t_lex *lextable);
 */
 int		ft_is_tok(char *entry);
 t_tok	ft_get_tok(char *tval);
+void	ft_get_tokvals(t_tokval *tokvals);
 
 /*
 ** tokens_utils.c
 */
+char	*gettok(t_tok token);
+void	ft_putlex(t_lex *lex);
 int		ft_getsize_separator(char *entry);
 int		ft_is_uncompleted(char *value);
 

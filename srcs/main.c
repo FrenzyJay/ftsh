@@ -14,6 +14,7 @@ int main(int argc, char **argv)
 	get_next_line(0, &line);
 	lex = ft_lexer(ft_strdup(line), NULL);
 	ft_memdel((void **)&line);
+	ft_putlex(lex);
 	pause();
 	return (0);
 }
