@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 06:03:16 by garm              #+#    #+#             */
-/*   Updated: 2014/03/18 13:18:30 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/19 18:35:22 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ static int		ft_search_until_token(char *entry)
 
 	if ((i = ft_is_tok(entry)) > 0)
 		return (i);
-	i = 0;
-	parenth = 0;
-	quote = 0;
+	parenth = quote = i = 0;
 	while (entry && entry[i])
 	{
 		if (quote == 0 && ft_is_tok(entry + i) && !parenth)
@@ -104,8 +102,13 @@ t_lex			*ft_lexer(char *entry, t_lex *lex)
 	tok = ft_get_tok(tokval);
 	lex = ft_lexer(entry, lex);
 	if (FT_TOK_IS_REDIRECTION(tok) && lex && lex->token == TOK_EXPR)
+	{
 		lex->token = tok;
-	else if (tok != TOK_SEPARATOR)
+		ft_memdel((void **)&tokval);
+	}
+	else if (tok == TOK_SEPARATOR)
+		ft_memdel((void **)&tokval);
+	else
 		lex = ft_lex_push(lex, tok, tokval);
 	return (lex);
 }
