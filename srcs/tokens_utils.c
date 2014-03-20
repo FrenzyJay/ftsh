@@ -6,10 +6,11 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 09:10:05 by garm              #+#    #+#             */
-/*   Updated: 2014/03/19 18:35:24 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/20 04:11:34 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 #include "parser.h"
 
@@ -50,5 +51,27 @@ int		ft_is_uncompleted(char *value)
 		return (0);
 	else
 		return (1);
+}
+
+t_lex	*ft_lexer_end(t_lex *lex)
+{
+	t_lex	*tmp;
+	t_lex	*new;
+
+	if (!lex)
+		return (NULL);
+	tmp = lex;
+	while (tmp && tmp->next)
+		tmp = tmp->next;
+	if (tmp->token != TOK_BG && tmp->token != TOK_END)
+	{
+		new = (t_lex *)ft_memalloc(sizeof(t_lex));
+		new->token = TOK_END;
+		new->value = ft_strdup(";");
+		new->next = NULL;
+		new->prev = tmp;
+		tmp->next = new;
+	}
+	return (lex);
 }
 

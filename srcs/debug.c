@@ -6,12 +6,11 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/18 14:40:08 by garm              #+#    #+#             */
-/*   Updated: 2014/03/18 15:02:55 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/20 03:41:40 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
-#include "parser.h"
 
 char	*ft_toktostr(t_tok token)
 {

@@ -34,7 +34,10 @@ SRCS =			srcs/main.c \
 				srcs/exec.c \
 				srcs/lexer.c \
 				srcs/tokens.c \
-				srcs/tokens_utils.c
+				srcs/tokens_utils.c \
+				srcs/ast.c \
+				srcs/parser.c \
+				srcs/parser_core.c
 
 OBJ =			$(SRCS:.c=.o)
 
