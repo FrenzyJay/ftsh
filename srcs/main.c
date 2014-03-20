@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:20 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/17 18:26:09 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/18 22:30:57 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	sh_init(char ***env)
 int main(int argc, char **argv)
 {
 	char	**env;
+	char	buf[10];
 
 	env = NULL;
 	if (argc > 1)
@@ -31,7 +32,6 @@ int main(int argc, char **argv)
 	exec_cmd(NULL);
 
 	destroy_env(env);
-	pause();
 	return (0);
 }
 
