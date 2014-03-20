@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 01:12:39 by garm              #+#    #+#             */
-/*   Updated: 2014/03/19 18:35:23 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/20 01:17:26 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSER_H
 
 # define NB_TOKVALS 12
-# define NB_TOKENS 16
+# define NB_TOKENS 15
 # define FT_ISQUOTE(C) (C == '\'' || C == '"' || C == '`')
 
 # define TOK_IS_LEFT_RE(T) (T == TOK_READ || T == TOK_HEREDOC)
@@ -23,20 +23,19 @@
 
 typedef enum	e_tok
 {
+	TOK_SEPARATOR,
 	TOK_UNCOMPLETED,
 	TOK_EXPR,
-	TOK_CMD,
-	TOK_ARG,
-	TOK_SEPARATOR,
 	TOK_HEREDOC,
 	TOK_READ,
 	TOK_WRITE,
 	TOK_APPEND,
+	TOK_CMD,
+	TOK_ARG,
 	TOK_PIPE,
 	TOK_AND,
 	TOK_OR,
 	TOK_SUBSH,
-	TOK_BQUOTE,
 	TOK_END,
 	TOK_BG
 }				t_tok;
