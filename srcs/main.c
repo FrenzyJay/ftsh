@@ -28,14 +28,21 @@ int main(int argc, char **argv)
 	if (argc > 1)
 		return (ft_error(argv[0]));
 	ft_putendl("~~ Hum ಠ_ಠ ~~\n");
-	sh_init(&env);
 
-//	exec_cmd(NULL);
-	var = ft_strdup("NEW");
-	env = ft_set_env(env, var, "new home");
-	free(var);
+	sh_init(&env);
+	var = ft_strdup("shell");
+
+
+//	env = ft_set_env(env, var, "new home");
+
+	ft_print_env(env);
+	ft_putstr("\n\n");
+
+	env = ft_unset_env(env, var);
+
 	ft_print_env(env);
 
+	free(var);
 	ft_destroy_env(env);
 	return (0);
 }

@@ -30,6 +30,7 @@ char	**ft_cp_env(char **env);
 void	ft_destroy_env(char **env);
 char	**ft_get_env(char **env, char *var);
 char	**ft_set_env(char **env, char *key, char *value);
+char	**ft_unset_env(char **env, char *key);
 
 #endif /* !FTSH_H */
 

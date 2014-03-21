@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "42sh.h"
 
@@ -93,6 +94,9 @@ char	**ft_get_env(char **env, char *var)
 	return (NULL);
 }
 
+/*
+** Add something to the env
+*/
 char	**ft_add_env(char **env, char *key, char *value)
 {
 	int		i;
@@ -143,4 +147,41 @@ char	**ft_set_env(char **env, char *key, char *value)
 		new = env;
 	}
 	return (new);
+}
+
+/*
+** Remove something from the env
+*/
+char	**ft_unset_env(char **env, char *key)
+{
+	char	**fresh;
+	int		i;
+	int		j;
+	char	**var;
+
+	fresh = NULL;
+	i = 0;
+	if ((var = ft_get_env(env, key)) == NULL)
+		return (env);
+	while (env && env[i])
+		i++;
+	if ((fresh = (char **)malloc(sizeof(char *) * i)) == NULL)
+		return (env);
+	fresh[i - 1] = '\0';
+	i--;
+	j = i - 1;
+	free(*var);
+	*var = NULL;
+	while (i >= 0)
+	{
+		if (env[i] == NULL)
+			i--;
+		else
+		{
+			fresh[j] = env[i];
+			i--;
+			j--;
+		}
+	}
+	return (fresh);
 }
