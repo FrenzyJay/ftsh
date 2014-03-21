@@ -37,7 +37,6 @@ int main(int argc, char **argv)
 	ft_print_env(env);
 
 	ft_destroy_env(env);
-	pause();
 	return (0);
 }
 

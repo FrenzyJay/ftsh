@@ -81,13 +81,15 @@ char	**ft_get_env(char **env, char *var)
 	i = 0;
 	size = 0;
 	if (var != NULL)
-		size = ft_strlen(var);
-	var[size] = '=';
-	while (env && env[i] && ft_strncmp(env[i], var, size) != 0)
-		i++;
-	var[size] = '\0';
-	if (env && env[i])
-		return (&(env[i]));
+	{
+		size = strlen(var);
+		var[size] = '=';
+		while (env && env[i] && ft_strncmp(env[i], var, size) != 0)
+			i++;
+		var[size] = '\0';
+		if (env && env[i])
+			return (&(env[i]));
+	}
 	return (NULL);
 }
 
@@ -103,7 +105,8 @@ char	**ft_add_env(char **env, char *key, char *value)
 	new = NULL;
 	while (env && env[i])
 		i++;
-	new = (char **)malloc(sizeof(char *) * (i + 2));
+	if ((new = (char **)malloc(sizeof(char *) * (i + 2))) == NULL)
+		return (NULL);
 	while (j < i)
 	{
 		new[j] = ft_strdup(env[j]);
