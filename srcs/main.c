@@ -30,10 +30,10 @@ int main(int argc, char **argv)
 	ft_putendl("~~ Hum ಠ_ಠ ~~\n");
 
 	sh_init(&env);
-	var = ft_strdup("shell");
+	var = ft_strdup("crap");
 
 
-//	env = ft_set_env(env, var, "new home");
+	env = ft_set_env(env, var, "more crap");
 
 	ft_print_env(env);
 	ft_putstr("\n\n");

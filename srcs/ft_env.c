@@ -83,7 +83,7 @@ char	**ft_get_env(char **env, char *var)
 	size = 0;
 	if (var != NULL)
 	{
-		size = strlen(var);
+		size = ft_strlen(var);
 		var[size] = '=';
 		while (env && env[i] && ft_strncmp(env[i], var, size) != 0)
 			i++;
@@ -183,5 +183,7 @@ char	**ft_unset_env(char **env, char *key)
 			j--;
 		}
 	}
+	free(env);
+	env = NULL;
 	return (fresh);
 }
