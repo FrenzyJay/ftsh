@@ -1,0 +1,1 @@
+gcc -Wall -Wextra -Werror main.c process_lst.c -I. -I../../libft/includes/ -L../../libft/ -lft
