@@ -6,14 +6,14 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:17:21 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/23 16:33:59 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/23 17:51:48 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lst.h"
 #include "libft.h"
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 static void	ft_command_process(char **argv)
 {
@@ -37,11 +37,11 @@ static void	ft_command_process(char **argv)
 static void	ft_whatstate(char c)
 {
 	if (c == 0)
-		write(1, " done      ", 11);
+		ft_putstr(" done      ");
 	else if (c == 1)
-		write(1, " suspended ", 11);
+		ft_putstr(" suspended ");
 	else if (c == 2)
-		write(1, " running   ", 11);
+		ft_putstr(" running   ");
 }
 
 void		ft_viewlist_process(t_process *list)
@@ -49,10 +49,7 @@ void		ft_viewlist_process(t_process *list)
 	t_process	*cursor;
 
 	if (!list)
-	{
-		ft_putendl("lol is empty");
 		return ;
-	}
 	cursor = list;
 	while (42)
 	{
