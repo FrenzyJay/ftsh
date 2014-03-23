@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/20 03:42:51 by garm              #+#    #+#             */
-/*   Updated: 2014/03/20 09:30:10 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/23 00:46:33 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ t_lex		*ft_parser_find(t_lex *head, t_lex *tail, t_tok tok)
 		return (NULL);
 	while (head && head->token != tok && head != tail)
 		head = head->next;
-	return (head);
+	if (head->token == tok)
+		return (head);
+	else
+		return (NULL);
 }
 
 t_lex		*ft_parser_find2(t_lex *head, t_lex *tail, t_tok tok1, t_tok tok2)
@@ -43,6 +46,9 @@ t_lex		*ft_parser_find2(t_lex *head, t_lex *tail, t_tok tok1, t_tok tok2)
 		return (NULL);
 	while (head && head->token != tok1 && head->token != tok2 && head != tail)
 		head = head->next;
-	return (tail);
+	if (head->token == tok1 || head->token == tok2)
+		return (head);
+	else
+		return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/20 05:11:51 by garm              #+#    #+#             */
-/*   Updated: 2014/03/20 09:27:01 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/22 22:50:08 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_node		*ft_ast_add(t_node *tree, t_lex *elem, char side)
 {
 	t_node		*new;
 
+	if (!elem)
+		return (tree);
 	new = (t_node *)ft_memalloc(sizeof(t_node));
 	new->token = elem->token;
 	new->value = elem->value;
