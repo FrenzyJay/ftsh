@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 17:50:11 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/23 17:51:10 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/23 19:29:21 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,21 @@ int			ft_min_num_job(t_job *lst)
 			break ;
 	}
 	return (min);
+}
+
+int		ft_job_completed(t_job *job)
+{
+	t_process	*process;
+
+	process = *job->first_process;
+	while (42)
+	{
+		if (process->completed == 0)
+			return (0);
+		if (process->next == NULL)
+			break ;
+		else
+			process = process->next;
+	}
+	return (1);
 }

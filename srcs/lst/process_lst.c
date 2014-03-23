@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:17:21 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/23 17:51:48 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/23 22:05:46 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,23 @@ static void	ft_command_process(char **argv)
 	}
 }
 
-static void	ft_whatstate(char c)
-{
-	if (c == 0)
-		ft_putstr(" done      ");
-	else if (c == 1)
-		ft_putstr(" suspended ");
-	else if (c == 2)
-		ft_putstr(" running   ");
-}
-
 void		ft_viewlist_process(t_process *list)
 {
 	t_process	*cursor;
+	char		*stateM[3];
+	int			index;
 
 	if (!list)
 		return ;
+	stateM[0] = " done      ";
+	stateM[1] = " suspended ";
+	stateM[2] = " running   ";
 	cursor = list;
 	while (42)
 	{
 		ft_putnbr(cursor->pid);
-		ft_whatstate(cursor->state);
+		index = cursor->state;
+		ft_putstr(stateM[index]);
 		ft_command_process(cursor->argv);
 		ft_putchar('\n');
 		if (cursor->next == NULL)
