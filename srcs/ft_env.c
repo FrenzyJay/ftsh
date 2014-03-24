@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:43:26 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/20 09:22:28 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/24 05:43:50 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,30 @@ char	**ft_get_env(char **env, char *var)
 			i++;
 		var[size] = '\0';
 		if (env && env[i])
-			return (&(env[i]));
+			return (env + i);
+	}
+	return (NULL);
+}
+
+/*
+** Get the value of an env var
+*/
+char	*ft_get_env_val(char **env, char *var)
+{
+	int		i;
+	char	**tmp;
+	char	*fck;
+
+	i = 0;
+	if (var && env)
+	{
+		if ((tmp = ft_get_env(env, var)) == NULL)
+			return (NULL);
+		fck = *tmp;
+		while (fck && fck[i] && fck[i] != '=')
+			i++;
+		if (tmp && *tmp)
+			return (&fck[i + 1]);
 	}
 	return (NULL);
 }
@@ -159,7 +182,6 @@ char	**ft_unset_env(char **env, char *key)
 	int		j;
 	char	**var;
 
-	fresh = NULL;
 	i = 0;
 	if ((var = ft_get_env(env, key)) == NULL)
 		return (env);
@@ -170,8 +192,6 @@ char	**ft_unset_env(char **env, char *key)
 	fresh[i - 1] = '\0';
 	i--;
 	j = i - 1;
-	free(*var);
-	*var = NULL;
 	while (i >= 0)
 	{
 		if (env[i] == NULL)
@@ -183,6 +203,8 @@ char	**ft_unset_env(char **env, char *key)
 			j--;
 		}
 	}
+	free(*var);
+	*var = NULL;
 	free(env);
 	env = NULL;
 	return (fresh);

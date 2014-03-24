@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 20:59:38 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/23 22:59:08 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/24 03:36:04 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,20 @@
 /*
 ** Update the PWD and OLDPWD
 */
-void	update_pwd(char **env)
+char	**update_pwd(char **env)
 {
-	int		i;
-	char	*pathtmp;
 	char	*buffer;
+	char	*pwd;
+	char	*oldpwd;
 
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], "PWD", 3) == 0)
-		{
-			pathtmp = ft_strchr(env[i], '=');
-			buffer = getcwd(NULL, 0);
-			env[i] = ft_strjoin("PWD=", buffer);
-		}
-		i++;
-	}
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], "OLDPWD", 6) == 0)
-		{
-			env[i] = ft_strjoin("OLDPWD=", pathtmp);
-		}
-		i++;
-	}
+	pwd = ft_strdup("PWD");
+	oldpwd = ft_strdup("OLDPWD");
+	env = ft_set_env(env, oldpwd, ft_get_env_val(env, pwd));
+	buffer = getcwd(NULL, 0);
+	env = ft_set_env(env, pwd, buffer);
+	free(pwd);
+	free(oldpwd);
+	return (env);
 }
 
 /*
@@ -71,7 +59,7 @@ char	**ft_cd(char **args, char **env)
 	if (i < 0)
 		ft_printf("not a directory : %s\n", args[1]);
 	else
-		update_pwd(env);
+		env = update_pwd(env);
 	return (env);
 }
 
