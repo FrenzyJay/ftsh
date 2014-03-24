@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:05:14 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/23 16:09:07 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/24 20:33:58 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,11 @@ typedef struct		s_job
 
 void	ft_viewlist_process(t_process *list);
 void	ft_add_process(t_process **list, pid_t pid, char **argv);
+
+/*
+** SIGNALS
+*/
+
+void	ft_sig_handler(int c);
 
 #endif /* LST_H */
