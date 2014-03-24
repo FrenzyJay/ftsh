@@ -20,6 +20,8 @@
 #include <sys/uio.h>
 #include <string.h>
 
+/* Just a comment :) */
+
 void	ft_exec(t_process **lst, char **cmd, char **env)
 {
 	pid_t	ft;
