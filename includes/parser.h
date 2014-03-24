@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 01:12:39 by garm              #+#    #+#             */
-/*   Updated: 2014/03/23 00:46:35 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/24 12:14:29 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define NB_TOKENS 16
 # define FT_ISQUOTE(C) (C == '\'' || C == '"' || C == '`')
 
-# define TOK_IS_LEFT_RE(T) (T == TOK_READ || T == TOK_HEREDOC)
-# define TOK_IS_RIGHT_RE(T) (T == TOK_WRITE || T == TOK_APPEND)
+# define TOK_IS_LEFT_RE(T) ((T) == TOK_READ || (T) == TOK_HEREDOC)
+# define TOK_IS_RIGHT_RE(T) ((T) == TOK_WRITE || (T) == TOK_APPEND)
 # define FT_TOK_IS_REDIRECTION(T) (TOK_IS_LEFT_RE(T) || TOK_IS_RIGHT_RE(T))
 
 typedef enum	e_tok

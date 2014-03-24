@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/20 04:46:51 by garm              #+#    #+#             */
-/*   Updated: 2014/03/23 00:46:31 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/24 12:14:33 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@ t_node	*ft_parse_logic(t_lex *head, t_lex *tail, t_node *tree)
 	if (!head || head == tail)
 		return (tree);
 	logic_ope = ft_parser_find2(head, tail, TOK_AND, TOK_OR);
-	tree = ft_parse_pipeline(head, logic_ope, tree, 0);
 	if (!logic_ope)
+	{
+		tree = ft_parse_pipeline(head, tail, tree, 0);
 		return (tree);
+	}
+	tree = ft_parse_pipeline(head, logic_ope, tree, 0);
 	tree = ft_ast_add(tree, logic_ope, 'L');
 	return (ft_parse_logic(logic_ope->next, tail, tree));
 }
@@ -58,9 +61,9 @@ t_node	*ft_parse_pipeline(t_lex *head, t_lex *tail, t_node *tree, int ktr)
 	tree = ft_parse_pipeline(pipeline_ope->next, tail, tree, ktr);
 	tree = ft_ast_add(tree, pipeline_ope, 'L');
 	next_pipe = ft_parser_find(pipeline_ope->next, tail, TOK_PIPE);
-	ft_parse_redirections(pipeline_ope, next_pipe, tree, 'R');
-	if (ktr == 1)
+	if (pipeline_ope && ktr == 1)
 		return (ft_parse_redirections(head, pipeline_ope, tree, 'L'));
+	ft_parse_redirections(pipeline_ope, next_pipe, tree, 'R');
 	return (tree);
 }
 
