@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/20 04:46:51 by garm              #+#    #+#             */
-/*   Updated: 2014/03/24 12:14:33 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/24 17:35:49 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,35 @@ t_node	*ft_parse_pipeline(t_lex *head, t_lex *tail, t_node *tree, int ktr)
 
 t_node	*ft_parse_redirections(t_lex *head, t_lex *tail, t_node *tree, int side)
 {
-	
-	return (NULL);
-	(void)head;
-	(void)tail;
-	(void)tree;
-	(void)side;
+	t_lex	*cursor;
+
+	cursor = head;
+	while (cursor && cursor != tail)
+	{
+		if (FT_TOK_IS_REDIRECTION(cursor->token))
+		{
+			tree = ft_ast_add(tree, cursor, side);
+			side = 'R';
+		}
+		cursor = cursor->next;
+	}
+	return (ft_parse_cmd(head, tail, tree, side));
+}
+
+t_node	*ft_parse_cmd(t_lex *head, t_lex *tail, t_node *tree, int side)
+{
+	t_lex	*cursor;
+
+	cursor = head;
+	while (cursor && cursor != tail)
+	{
+		if (cursor->token == TOK_EXPR)
+		{
+			tree = ft_ast_add(tree, cursor, side);
+			side = 'R';
+		}
+		cursor = cursor->next;
+	}
+	return (tree);
 }
 

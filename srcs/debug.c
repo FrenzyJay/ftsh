@@ -6,12 +6,30 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/18 14:40:08 by garm              #+#    #+#             */
-/*   Updated: 2014/03/20 03:41:40 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/24 19:23:07 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
 
+/*
+** DISPLAY ABSTRACT SYNTAX TREE
+*/
+void	ft_put_ast(t_node *tree, int side)
+{
+	if (!tree)
+		return ;
+	if (side == 'L')
+		ft_putendl("");
+	ft_putstr(" -> ");
+	ft_putstr(tree->value);
+	ft_put_ast(tree->right, 'R');
+	ft_put_ast(tree->left, 'L');
+}
+
+/*
+** DISPLAY LEXING TABLE
+*/
 char	*ft_toktostr(t_tok token)
 {
 	char	*str[NB_TOKENS];
