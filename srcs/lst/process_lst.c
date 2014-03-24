@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:17:21 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/23 22:05:46 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/24 22:22:16 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_command_process(char **argv)
 void		ft_viewlist_process(t_process *list)
 {
 	t_process	*cursor;
-	char		*stateM[3];
+	char		*stateM[4];
 	int			index;
 
 	if (!list)
@@ -45,6 +45,7 @@ void		ft_viewlist_process(t_process *list)
 	stateM[0] = " done      ";
 	stateM[1] = " suspended ";
 	stateM[2] = " running   ";
+	stateM[3] = " continued ";
 	cursor = list;
 	while (42)
 	{
