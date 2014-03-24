@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:39:35 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/24 20:33:41 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/24 20:41:58 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_exec(t_process **lst, char **cmd, char **env)
 		wait(&ft);
 	}
 	else
-		execve("/bin/ls", cmd, env);
+		execve("/usr/bin/emacs", cmd, env);
 }
 
 int		main(int ac, char **av, char **env)
