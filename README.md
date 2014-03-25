@@ -1,12 +1,12 @@
 42sh
 ====
 
-Update 25 / 03 / 2014 :
-  Merge : master / lexer / read_line
-  Pensez a branch le nouveau master ^^
+Update 25 / 03 / 2014 : \n
+  Merge : master / lexer / read_line \n
+  Pensez a branch le nouveau master ^^ \n
 
-Libft :
-  A compiler avec la lib : https://github.com/FrenzyJay/libft
+Libft : \n
+  A compiler avec la lib : https://github.com/FrenzyJay/libft \n
 
-Help :
-  http://tinyurl.com/kw9kbgg
+Help : \n
+  http://tinyurl.com/kw9kbgg \n
