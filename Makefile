@@ -6,7 +6,7 @@
 #    By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 18:33:50 by jvincent          #+#    #+#              #
-#    Updated: 2014/03/17 18:23:38 by jvincent         ###   ########.fr        #
+#    Updated: 2014/03/25 17:00:16 by jibanez          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -29,7 +29,7 @@ all: $(NAME)
 %.o: %.c
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
-$(NAME): $(OBJ) 
+$(NAME): $(OBJ)
 	@make -sC libft
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS)
 	@echo $(NAME) ok
@@ -47,4 +47,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: clean fclean re all
-
