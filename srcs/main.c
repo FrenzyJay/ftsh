@@ -15,7 +15,6 @@ int main(int argc, char **argv)
 	{
 		ast = ft_parser(line);
 		ast = ft_ast_rewind(ast);
-
 		ft_put_ast(ast, 0);
 	}
 	return (0);

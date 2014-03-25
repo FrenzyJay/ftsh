@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 06:03:16 by garm              #+#    #+#             */
-/*   Updated: 2014/03/25 10:27:45 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/25 12:45:30 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void			ft_lex_destroy(t_lex **lex)
 		return ;
 	if ((*lex)->next)
 		ft_lex_destroy(&((*lex)->next));
-	ft_memdel((void **)&((*lex)->value));
 	ft_memdel((void **)lex);
 }
 
