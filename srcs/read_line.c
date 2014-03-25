@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/25 18:12:49 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/25 18:14:06 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/25 21:04:34 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ char				*read_line(void)
 		read(0, buffer, 4);
 		key = *(unsigned int *)buffer;
 		if (key == CTRL_D)
-		{//////
-			default_term_mode();////
-			exit(1);// put builtin exit here
-		}/////
+		{/**/
+			default_term_mode();
+			exit(1); /* put builtin exit here */
+		}/**/
 		key_hook(key, &user);
 	}
 	add_to_historic(&user, &historic);
