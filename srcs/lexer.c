@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 06:03:16 by garm              #+#    #+#             */
-/*   Updated: 2014/03/24 18:24:00 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/25 10:27:45 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_lex			*ft_lexer(char *entry, t_lex *lex)
 	tokval = ft_strsuck(&entry, i);
 	tok = ft_get_tok(tokval);
 	lex = ft_lexer(entry, lex);
-	if (FT_TOK_IS_REDIRECTION(tok) && lex && lex->token == TOK_EXPR)
+	if (TOK_IS_REDIRECTION(tok) && lex && lex->token == TOK_EXPR)
 	{
 		lex->token = tok;
 		ft_memdel((void **)&tokval);

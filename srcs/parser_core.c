@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/20 04:46:51 by garm              #+#    #+#             */
-/*   Updated: 2014/03/24 17:35:49 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/25 10:27:42 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ t_node	*ft_parse_pipeline(t_lex *head, t_lex *tail, t_node *tree, int ktr)
 	tree = ft_ast_add(tree, pipeline_ope, 'L');
 	next_pipe = ft_parser_find(pipeline_ope->next, tail, TOK_PIPE);
 	if (pipeline_ope && ktr == 1)
+	{
+		ft_parse_redirections(pipeline_ope, next_pipe, tree, 'R');
 		return (ft_parse_redirections(head, pipeline_ope, tree, 'L'));
+	}
 	ft_parse_redirections(pipeline_ope, next_pipe, tree, 'R');
 	return (tree);
 }
@@ -74,7 +77,9 @@ t_node	*ft_parse_redirections(t_lex *head, t_lex *tail, t_node *tree, int side)
 	cursor = head;
 	while (cursor && cursor != tail)
 	{
-		if (FT_TOK_IS_REDIRECTION(cursor->token))
+		if (!(TOK_IS_REDIRECTION(cursor->token)) && (cursor->token != TOK_EXPR))
+			break ;
+		if (TOK_IS_REDIRECTION(cursor->token))
 		{
 			tree = ft_ast_add(tree, cursor, side);
 			side = 'R';
@@ -97,6 +102,8 @@ t_node	*ft_parse_cmd(t_lex *head, t_lex *tail, t_node *tree, int side)
 			side = 'R';
 		}
 		cursor = cursor->next;
+		if (!(TOK_IS_REDIRECTION(cursor->token)) && (cursor->token != TOK_EXPR))
+			break ;
 	}
 	return (tree);
 }
