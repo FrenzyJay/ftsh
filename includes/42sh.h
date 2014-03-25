@@ -14,8 +14,13 @@
 # define FTSH_H
 
 # include "libft.h"
+# include "parser.h"
 
 extern char **environ;
+/*
+** EXEC
+*/
+int	exec_cmd(char *cmd);
 
 /*
 ** FT_EXEC.C
