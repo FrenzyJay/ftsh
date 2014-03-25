@@ -6,11 +6,12 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 17:50:11 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/25 22:35:38 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/26 00:21:17 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lst.h"
+#include "libft.h"
 #include <unistd.h>
 
 void		ft_determine_recent(t_job **list)
@@ -30,6 +31,7 @@ void		ft_determine_recent(t_job **list)
 			cursor->recent = '-';
 		else
 			cursor->recent = ' ';
+		i++;
 		if (cursor->next == NULL)
 			return ;
 		else
@@ -48,9 +50,9 @@ int			ft_min_num_job(t_job *lst)
 	cursor = lst;
 	while (42)
 	{
-		if (cursor->num == min)
+		if (cursor->num >= min)
 		{
-			min++;
+			min = cursor->num + 1;
 			cursor = lst;
 		}
 		if (cursor->next != NULL)
@@ -59,6 +61,34 @@ int			ft_min_num_job(t_job *lst)
 			break ;
 	}
 	return (min);
+}
+
+void	ft_swap(t_job **lst)
+{
+	(*lst)->next = (*lst)->next->next;
+	(*lst)->next->prev->next = *lst;
+	(*lst)->next->prev->next = (*lst)->prev;
+	(*lst)->prev = (*lst)->next->prev;
+	if ((*lst)->next != NULL)
+		(*lst)->next->prev = *lst;
+}
+
+t_job	*ft_sort_list_asc(t_job *lst)
+{
+	t_job	*cursor;
+
+	cursor = lst;
+	while (cursor->next != NULL)
+	{
+		if (cursor->num > cursor->next->num)
+		{
+			ft_swap(&cursor);
+			cursor = lst;
+		}
+		else
+			cursor = cursor->next;
+	}
+	return (lst);
 }
 
 int		ft_job_completed(t_job *job)

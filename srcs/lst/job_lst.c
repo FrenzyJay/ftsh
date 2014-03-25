@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 17:03:43 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/25 22:43:48 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/26 00:21:00 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void		ft_print_num_job(int i)
 
 void		ft_viewlist_job(t_job *lstjob)
 {
-//	t_process	*curs_p;
 	t_job		*curs_j;
 
 	if (!lstjob)
 		return ;
-	curs_j = lstjob;
+//	curs_j = lstjob;
+	curs_j = ft_sort_list_asc(lstjob);
 	while (42)
 	{
 		ft_print_num_job(curs_j->num);
@@ -72,13 +72,13 @@ t_job		*ft_create_job(t_job **lst_j, pid_t *tab_p, int size, char *cmd)
 		new->pgid = getpgid(tab_p[0]);
 		new->command = cmd;
 		new->next = NULL;
+		new->prev = NULL;
 	}
 	return (new);
 }
 
 void		ft_add_job(t_job **lst_j, pid_t *process, int size, char *cmd)
 {
-//	t_job	*cursor_j;
 	t_job	*new;
 
 	new = ft_create_job(lst_j, process, size, cmd);
@@ -89,8 +89,15 @@ void		ft_add_job(t_job **lst_j, pid_t *process, int size, char *cmd)
 		else
 		{
 			new->next = *lst_j;
+			(*lst_j)->prev = new;
 			*lst_j = new;
-			ft_determine_recent(lst_j);
+/*			if (new->next != NULL)
+			{
+				new->next->recent = ' ';
+				if (new->next->next != NULL)
+					new->next->next->recent = ' ';
+					}*/
+			//ft_determine_recent(lst_j);
 		}
 	}
 }

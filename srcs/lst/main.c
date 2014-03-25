@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:39:35 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/25 22:40:42 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/25 23:46:02 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,46 @@ int		main(int ac, char **av, char **env)
 	pid_t		*tab_p;
 
 	tab_p = (pid_t *)malloc(sizeof(pid_t) * 3);
+	lstj = singleton();
+	tab_p[0] = 1000;
+	tab_p[1] = 1001;
+	tab_p[2] = 1002;
+	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
+	tab_p[0] = 2000;
+	tab_p[1] = 2001;
+	tab_p[2] = 2002;
+	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
+	tab_p[0] = 3000;
+	tab_p[1] = 3001;
+	tab_p[2] = 3002;
+	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
+	tab_p[0] = 4000;
+	tab_p[1] = 4001;
+	tab_p[2] = 4002;
+	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
 	tab_p[0] = 5000;
 	tab_p[1] = 5001;
 	tab_p[2] = 5002;
-	lstj = singleton();
+	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
+	tab_p[0] = 6000;
+	tab_p[1] = 6001;
+	tab_p[2] = 6002;
+	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
+	tab_p[0] = 7000;
+	tab_p[1] = 7001;
+	tab_p[2] = 7002;
+	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
+	tab_p[0] = 8000;
+	tab_p[1] = 8001;
+	tab_p[2] = 8002;
+	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
+	tab_p[0] = 9000;
+	tab_p[1] = 9001;
+	tab_p[2] = 9002;
+	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
+	tab_p[0] = 1110;
+	tab_p[1] = 1111;
+	tab_p[2] = 1112;
 	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
 	ft_viewlist_job(lstj);
 //	(void)lstj;
