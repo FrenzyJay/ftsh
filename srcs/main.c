@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:20 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/24 06:08:32 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/25 18:13:27 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "42sh.h"
+#include "readline.h"
 
 void	sh_init(char ***env)
 {
@@ -27,6 +28,7 @@ int main(int argc, char **argv)
 {
 	char	**env;
 	char	*var;
+	char	*cmd;
 
 	env = NULL;
 	if (argc > 1)
@@ -40,10 +42,16 @@ int main(int argc, char **argv)
 
 	env = ft_set_env(env, var, "more crap");
 
-	ft_print_env(env);
+	//ft_print_env(env);
 
 //	printf("\n\n%s\n\n", ft_get_env_val(env, var));
-
+	while (42)
+	{
+		raw_term_mode();
+		cmd = read_line();
+		ft_putendl(cmd);
+		ft_strdel(&cmd);
+	}
 	free(var);
 	ft_destroy_env(env);
 	return (0);

@@ -6,7 +6,7 @@
 #    By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 18:33:50 by jvincent          #+#    #+#              #
-#    Updated: 2014/03/25 17:00:16 by jibanez          ###   ########.fr        #
+#    Updated: 2014/03/25 18:13:16 by jibanez          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,12 +16,24 @@ CFLAGS = 		-Wall -Werror -Wextra -g
 CFLAGS +=		-I./includes \
 				-I./libft/includes \
 				-I./libft/printf/includes
-LDFLAGS = 		-L libft -lft
+LDFLAGS = 		-L libft -lft \
+				-L /usr/lib -ltermcap
 INCLUDE_LIB = 	libft/includes
 LIB = 			libft
 SRCS = 			srcs/main.c \
 				srcs/ft_exec.c \
-				srcs/ft_env.c
+				srcs/ft_env.c \
+				srcs/dyn_buff.c \
+				srcs/key_arrows.c \
+				srcs/key_del.c \
+				srcs/key_hook.c \
+				srcs/key_travel.c \
+				srcs/prompt.c \
+				srcs/puts.c \
+				srcs/read_line.c \
+				srcs/refresh.c \
+				srcs/t_hlst.c \
+				srcs/term_mode.c
 OBJ = 			$(SRCS:.c=.o)
 
 all: $(NAME)
