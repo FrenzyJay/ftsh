@@ -36,6 +36,7 @@ SRCS =			srcs/main.c \
 				srcs/tokens.c \
 				srcs/tokens_utils.c \
 				srcs/ast.c \
+				srcs/parser_error.c \
 				srcs/parser.c \
 				srcs/parser_core.c
 

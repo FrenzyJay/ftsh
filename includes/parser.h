@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 01:12:39 by garm              #+#    #+#             */
-/*   Updated: 2014/03/25 10:26:59 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/25 19:57:47 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 # define PARSER_H
 
 # define NB_TOKVALS 12
-# define NB_TOKENS 16
+# define NB_TOKENS 15
 # define FT_ISQUOTE(C) (C == '\'' || C == '"' || C == '`')
 
-# define TOK_IS_LEFT_RE(T) ((T) == TOK_READ || (T) == TOK_HEREDOC)
-# define TOK_IS_RIGHT_RE(T) ((T) == TOK_WRITE || (T) == TOK_APPEND)
+# define TOK_IS_LEFT_RE(T) ((T) == tok_read || (T) == tok_heredoc)
+# define TOK_IS_RIGHT_RE(T) ((T) == tok_write || (T) == tok_append)
 # define TOK_IS_REDIRECTION(T) (TOK_IS_LEFT_RE(T) || TOK_IS_RIGHT_RE(T))
 
 typedef enum	e_tok
 {
-	TOK_SEPARATOR,
-	TOK_UNCOMPLETED,
-	TOK_EXPR,
-	TOK_HEREDOC,
-	TOK_READ,
-	TOK_WRITE,
-	TOK_APPEND,
-	TOK_CMD,
-	TOK_ARG,
-	TOK_PIPE,
-	TOK_AND,
-	TOK_OR,
-	TOK_SUBSH,
-	TOK_END,
-	TOK_BG
+	tok_separator,
+	tok_uncompleted,
+	tok_expr,
+	tok_heredoc,
+	tok_read,
+	tok_write,
+	tok_append,
+	tok_cmd,
+	tok_arg,
+	tok_pipe,
+	tok_and,
+	tok_or,
+	tok_subsh,
+	tok_end,
+	tok_bg
 }				t_tok;
 
 typedef struct s_tokval
@@ -113,6 +113,11 @@ t_node	*ft_parse_cmd(t_lex *head, t_lex *tail, t_node *tree, int side);
 */
 t_node	*ft_ast_add(t_node *tree, t_lex *elem, char side);
 t_node	*ft_ast_rewind(t_node *tree);
+
+/*
+** parser_error.c
+*/
+char	*ft_parser_check_error(t_node **ast);
 
 #endif /* !PARSER_H */
 

@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 07:13:19 by garm              #+#    #+#             */
-/*   Updated: 2014/03/20 03:42:40 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/25 19:55:45 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ static void			ft_set_tokval(t_tokval *tokval, t_tok token, char *value)
 
 void			ft_get_tokvals(t_tokval *tokvals)
 {
-	ft_set_tokval(&tokvals[0], TOK_HEREDOC, "<<");
-	ft_set_tokval(&tokvals[1], TOK_APPEND, ">>");
-	ft_set_tokval(&tokvals[2], TOK_AND, "&&");
-	ft_set_tokval(&tokvals[3], TOK_OR, "||");
-	ft_set_tokval(&tokvals[4], TOK_SEPARATOR, " ");
-	ft_set_tokval(&tokvals[5], TOK_SEPARATOR, "\t");
-	ft_set_tokval(&tokvals[6], TOK_READ, "<");
-	ft_set_tokval(&tokvals[7], TOK_WRITE, ">");
-	ft_set_tokval(&tokvals[8], TOK_PIPE, "|");
-	ft_set_tokval(&tokvals[9], TOK_END, ";");
-	ft_set_tokval(&tokvals[10], TOK_END, "\n");
-	ft_set_tokval(&tokvals[11], TOK_BG, "&");
+	ft_set_tokval(&tokvals[0], tok_heredoc, "<<");
+	ft_set_tokval(&tokvals[1], tok_append, ">>");
+	ft_set_tokval(&tokvals[2], tok_and, "&&");
+	ft_set_tokval(&tokvals[3], tok_or, "||");
+	ft_set_tokval(&tokvals[4], tok_separator, " ");
+	ft_set_tokval(&tokvals[5], tok_separator, "\t");
+	ft_set_tokval(&tokvals[6], tok_read, "<");
+	ft_set_tokval(&tokvals[7], tok_write, ">");
+	ft_set_tokval(&tokvals[8], tok_pipe, "|");
+	ft_set_tokval(&tokvals[9], tok_end, ";");
+	ft_set_tokval(&tokvals[10], tok_end, "\n");
+	ft_set_tokval(&tokvals[11], tok_bg, "&");
 }
 
 int				ft_is_tok(char *entry)
@@ -77,8 +77,8 @@ t_tok	ft_get_tok(char *tval)
 		i++;
 	}
 	if (ft_is_uncompleted(tval))
-		return (ret = TOK_UNCOMPLETED);
+		return (ret = tok_uncompleted);
 	else
-		return (ret = TOK_EXPR);
+		return (ret = tok_expr);
 }
 

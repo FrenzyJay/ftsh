@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 09:10:05 by garm              #+#    #+#             */
-/*   Updated: 2014/03/20 04:11:34 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/25 19:56:31 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ t_lex	*ft_lexer_end(t_lex *lex)
 	tmp = lex;
 	while (tmp && tmp->next)
 		tmp = tmp->next;
-	if (tmp->token != TOK_BG && tmp->token != TOK_END)
+	if (tmp->token != tok_bg && tmp->token != tok_end)
 	{
 		new = (t_lex *)ft_memalloc(sizeof(t_lex));
-		new->token = TOK_END;
+		new->token = tok_end;
 		new->value = ft_strdup(";");
 		new->next = NULL;
 		new->prev = tmp;

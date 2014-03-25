@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/18 14:40:08 by garm              #+#    #+#             */
-/*   Updated: 2014/03/24 19:23:07 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/25 17:02:14 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	ft_put_ast(t_node *tree, int side)
 	if (side == 'L')
 		ft_putendl("");
 	ft_putstr(" -> ");
+	ft_putstr("[");
+	ft_putstr(ft_toktostr(tree->token));
+	ft_putstr("]");
 	ft_putstr(tree->value);
 	ft_put_ast(tree->right, 'R');
 	ft_put_ast(tree->left, 'L');
@@ -34,22 +37,21 @@ char	*ft_toktostr(t_tok token)
 {
 	char	*str[NB_TOKENS];
 
-	str[0] = "TOK_UNCOMPLETED";
-	str[1] = "TOK_EXPR";
-	str[2] = "TOK_CMD";
-	str[3] = "TOK_ARG";
-	str[4] = "TOK_SEPARATOR";
-	str[5] = "TOK_HEREDOC";
-	str[6] = "TOK_READ";
-	str[7] = "TOK_WRITE";
-	str[8] = "TOK_APPEND";
-	str[9] = "TOK_PIPE";
-	str[10] = "TOK_AND";
-	str[11] = "TOK_OR";
-	str[12] = "TOK_SUBSH";
-	str[13] = "TOK_BQUOTE";
-	str[14] = "TOK_END";
-	str[15] = "TOK_BG";
+	str[0] = "SEPARATOR";
+	str[1] = "UNCOMPLETED";
+	str[2] = "EXPR";
+	str[3] = "HEREDOC";
+	str[4] = "READ";
+	str[5] = "WRITE";
+	str[6] = "APPEND";
+	str[7] = "CMD";
+	str[8] = "ARG";
+	str[9] = "PIPE";
+	str[10] = "AND";
+	str[11] = "OR";
+	str[12] = "SUBSH";
+	str[13] = "END";
+	str[14] = "BG";
 	return (str[token]);
 }
 

@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/20 04:46:51 by garm              #+#    #+#             */
-/*   Updated: 2014/03/25 10:27:42 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/25 19:57:49 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_node	*ft_parse_end(t_lex *head, t_node *tree)
 
 	if (!head)
 		return (tree);
-	tail = ft_parser_find2(head, NULL, TOK_END, TOK_BG);
+	tail = ft_parser_find2(head, NULL, tok_end, tok_bg);
 	tree = ft_parse_logic(head, tail, tree);
 	if (!tail)
 		return (tree);
@@ -34,7 +34,7 @@ t_node	*ft_parse_logic(t_lex *head, t_lex *tail, t_node *tree)
 
 	if (!head || head == tail)
 		return (tree);
-	logic_ope = ft_parser_find2(head, tail, TOK_AND, TOK_OR);
+	logic_ope = ft_parser_find2(head, tail, tok_and, tok_or);
 	if (!logic_ope)
 	{
 		tree = ft_parse_pipeline(head, tail, tree, 0);
@@ -53,21 +53,20 @@ t_node	*ft_parse_pipeline(t_lex *head, t_lex *tail, t_node *tree, int ktr)
 	ktr++;
 	if (!head || head == tail)
 		return (tree);
-	pipeline_ope = ft_parser_find(head, tail, TOK_PIPE);
+	pipeline_ope = ft_parser_find(head, tail, tok_pipe);
 	if (!pipeline_ope && ktr == 1)
 		return (ft_parse_redirections(head, tail, tree, 'L'));
 	else if (!pipeline_ope)
 		return (tree);
 	tree = ft_parse_pipeline(pipeline_ope->next, tail, tree, ktr);
 	tree = ft_ast_add(tree, pipeline_ope, 'L');
-	next_pipe = ft_parser_find(pipeline_ope->next, tail, TOK_PIPE);
+	next_pipe = ft_parser_find(pipeline_ope->next, tail, tok_pipe);
 	if (pipeline_ope && ktr == 1)
 	{
 		ft_parse_redirections(pipeline_ope, next_pipe, tree, 'R');
 		return (ft_parse_redirections(head, pipeline_ope, tree, 'L'));
 	}
-	ft_parse_redirections(pipeline_ope, next_pipe, tree, 'R');
-	return (tree);
+	return (ft_parse_redirections(pipeline_ope, next_pipe, tree, 'R'));
 }
 
 t_node	*ft_parse_redirections(t_lex *head, t_lex *tail, t_node *tree, int side)
@@ -77,14 +76,14 @@ t_node	*ft_parse_redirections(t_lex *head, t_lex *tail, t_node *tree, int side)
 	cursor = head;
 	while (cursor && cursor != tail)
 	{
-		if (!(TOK_IS_REDIRECTION(cursor->token)) && (cursor->token != TOK_EXPR))
-			break ;
 		if (TOK_IS_REDIRECTION(cursor->token))
 		{
 			tree = ft_ast_add(tree, cursor, side);
 			side = 'R';
 		}
 		cursor = cursor->next;
+		if (!(TOK_IS_REDIRECTION(cursor->token)) && (cursor->token != tok_expr))
+			break ;
 	}
 	return (ft_parse_cmd(head, tail, tree, side));
 }
@@ -96,13 +95,13 @@ t_node	*ft_parse_cmd(t_lex *head, t_lex *tail, t_node *tree, int side)
 	cursor = head;
 	while (cursor && cursor != tail)
 	{
-		if (cursor->token == TOK_EXPR)
+		if (cursor->token == tok_expr)
 		{
 			tree = ft_ast_add(tree, cursor, side);
 			side = 'R';
 		}
 		cursor = cursor->next;
-		if (!(TOK_IS_REDIRECTION(cursor->token)) && (cursor->token != TOK_EXPR))
+		if (!(TOK_IS_REDIRECTION(cursor->token)) && (cursor->token != tok_expr))
 			break ;
 	}
 	return (tree);
