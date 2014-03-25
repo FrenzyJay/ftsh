@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:17:21 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/24 22:22:16 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/25 20:37:41 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,16 @@ void		ft_viewlist_process(t_process *list)
 		index = cursor->state;
 		ft_putstr(stateM[index]);
 		ft_command_process(cursor->argv);
-		ft_putchar('\n');
 		if (cursor->next == NULL)
+		{
+			ft_putchar('\n');
 			return ;
+		}
 		else
+		{
+			ft_putstr(" |\n       ");
 			cursor = cursor->next;
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:39:35 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/24 20:41:58 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/25 19:34:11 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 #include <sys/uio.h>
 #include <string.h>
 
-/* Just a comment :) */
-
 void	ft_exec(t_process **lst, char **cmd, char **env)
 {
 	pid_t	ft;
@@ -33,7 +31,14 @@ void	ft_exec(t_process **lst, char **cmd, char **env)
 		wait(&ft);
 	}
 	else
-		execve("/usr/bin/emacs", cmd, env);
+		execve("/bin/sleep", cmd, env);
+}
+
+t_job	*singleton(void)
+{
+	static t_job	*lst = NULL;
+
+	return (lst);
 }
 
 int		main(int ac, char **av, char **env)
@@ -42,16 +47,21 @@ int		main(int ac, char **av, char **env)
 //	pid_t		ft;
 //	char		*buf;
 	char		*cmd[3];
+	t_job		*lstj;
 
+	lstj = singleton();
+	(void)lstj;
 	(void)av;
 	(void)ac;
-	cmd[0] = "emacs";
-//	cmd[1] = "-R";
-//	cmd[2] = "/";
+	cmd[0] = "sleep";
+	cmd[1] = "2";
+	cmd[2] = 0;
 //	if (ac == 1)
 //		return (1);
-	if (signal(SIGINT, ft_sig_handler) == SIG_ERR)
-		ft_putendl("can't catch SIGINT");
+	if (signal(SIGCHLD, ft_sig_handler) == SIG_ERR)
+		ft_putendl("can't catch SIGCHLD");
+//	if (signal(SIGINT, ft_sig_handler) == SIG_ERR)
+//		ft_putendl("can't catch SIGINT");
 	if (signal(SIGTSTP, ft_sig_handler) == SIG_ERR)
 		ft_putendl("can't catch SIGTSTP");
 	lst = NULL;
