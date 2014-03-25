@@ -3,9 +3,9 @@
 
 
 
-| Update date | Description | Note |
+| :date: Update date | Description | Note |
 |:-----------:|:-----------------------:|:-----------------------------:|
-| 25/03/2014 | merge : master / lexer / read_line | Pensez a branch le nouveau master :) |
+| 25/03/2014 | merge : master / lexer / read_line | :twisted_rightwards_arrows: Pensez a branch le nouveau master :) |
 ===
 
 Libft :
