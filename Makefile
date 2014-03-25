@@ -6,12 +6,12 @@
 #    By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 18:33:50 by jvincent          #+#    #+#              #
-#    Updated: 2014/03/25 20:38:12 by garm             ###   ########.fr        #
+#    Updated: 2014/03/25 21:22:42 by jvincent         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 CC =			gcc
-NAME =			42sh
+NAME =			ftsh
 
 ifeq ($(DEBUG), 1)
 	FLAGS =	-g -Wall -Wextra -pedantic
