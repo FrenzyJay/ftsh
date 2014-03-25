@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:05:14 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/25 20:33:44 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/25 21:29:32 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_viewlist_process(t_process *list);
 void	ft_add_process(t_process **list, pid_t pid, char **argv);
 
 void	ft_viewlist_job(t_job *lstjob);
-void	ft_add_job(t_job **lst_j, int *process, char *cmd);
+void	ft_add_job(t_job **lst_j, pid_t *process, int size,  char *cmd);
 
 void	ft_determine_recent(t_job **list);
 int		ft_min_num_job(t_job *lst);
