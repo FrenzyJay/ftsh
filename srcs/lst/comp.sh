@@ -1,1 +1,1 @@
-gcc -Wall -Wextra -Werror main.c process_lst.c signals.c job_lst.c -I. -I../../libft/includes/ -L../../libft/ -lft
+gcc -Wall -Wextra -Werror main.c process_lst.c signals.c job_lst.c functions_jobs.c -I. -I../../libft/includes/ -L../../libft/ -lft

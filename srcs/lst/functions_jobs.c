@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 17:50:11 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/24 23:59:47 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/25 22:35:38 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void		ft_determine_recent(t_job **list)
 {
-	t_job	cursor;
+	t_job	*cursor;
 	int		i;
 
 	if (*list == NULL)
@@ -50,11 +50,11 @@ int			ft_min_num_job(t_job *lst)
 	{
 		if (cursor->num == min)
 		{
-			num++;
+			min++;
 			cursor = lst;
 		}
 		if (cursor->next != NULL)
-			cursor = cursor->next
+			cursor = cursor->next;
 		else
 			break ;
 	}
@@ -65,7 +65,7 @@ int		ft_job_completed(t_job *job)
 {
 	t_process	*process;
 
-	process = *job->first_process;
+	process = job->first_process;
 	while (42)
 	{
 		if (process->completed == 0)

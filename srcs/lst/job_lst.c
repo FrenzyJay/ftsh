@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 17:03:43 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/25 21:31:42 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/25 22:43:48 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void		ft_print_num_job(int i)
 	ft_putchar(']');
 	if (i < 10)
 		ft_putchar(' ');
+	ft_putchar(' ');
 }
 
 void		ft_viewlist_job(t_job *lstjob)
@@ -36,6 +37,7 @@ void		ft_viewlist_job(t_job *lstjob)
 	{
 		ft_print_num_job(curs_j->num);
 		ft_putchar(curs_j->recent);
+		ft_putchar(' ');
 		ft_viewlist_process(curs_j->first_process);
 		if (curs_j->next == NULL)
 			break ;
