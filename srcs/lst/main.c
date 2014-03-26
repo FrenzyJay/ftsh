@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:39:35 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/26 19:33:57 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/26 23:53:28 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int		main(int ac, char **av, char **env)
 	tab_p[2] = 1112;
 	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
 	ft_viewlist_job(lstj);
+	ft_destroy_job(&lstj);
+	free(tab_p);
 //	(void)lstj;
 	(void)env;
 	(void)av;

@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:05:14 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/26 19:43:18 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/26 22:57:07 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	ft_determine_recent(t_job **list);
 int		ft_min_num_job(t_job *lst);
 int		ft_max_num_job(t_job *lst);
 int		ft_job_completed(t_job *job);
+
+void	ft_destroy_process(t_process **list);
+void	ft_destroy_job(t_job **list);
 
 /*
 ** SIGNALS

@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:17:21 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/26 19:50:41 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/26 23:46:31 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ t_process	*ft_create_process(pid_t pid, char **argv)
 		new->stopped = 0;
 		new->next = NULL;
 	}
+	else
+		return (NULL);
 	return (new);
 }
 
