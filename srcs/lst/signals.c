@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/24 15:04:43 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/25 19:16:06 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/27 00:53:54 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <signal.h>
 #include <sys/wait.h>
 
-void	ft_sigchld()
+void	ft_sigchld(void)
 {
 	int		status;
 	pid_t	pid;
@@ -26,12 +26,12 @@ void	ft_sigchld()
 	}
 }
 
-void	ft_sigint()
+void	ft_sigint(void)
 {
 	ft_putendl("sigkill catch");
 }
 
-void	ft_sigtstp()
+void	ft_sigtstp(void)
 {
 	ft_putendl("sigstop catch");
 }

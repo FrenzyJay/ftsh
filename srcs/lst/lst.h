@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:05:14 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/26 22:57:07 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/27 00:55:21 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,14 @@ int		ft_min_num_job(t_job *lst);
 int		ft_max_num_job(t_job *lst);
 int		ft_job_completed(t_job *job);
 
+void	ft_destroy_tab(char **tab);
 void	ft_destroy_process(t_process **list);
 void	ft_destroy_job(t_job **list);
+
+void	ft_check_process_tostop(t_process **lstprocess);
+void	ft_stop_job(t_job **lstjob, pid_t pgid);
+void	ft_check_process_tocont(t_process **lstprocess);
+void	ft_cont_job(t_job **lstjob, pid_t pgid);
 
 /*
 ** SIGNALS
@@ -61,4 +67,4 @@ void	ft_destroy_job(t_job **list);
 
 void	ft_sig_handler(int c);
 
-#endif /* LST_H */
+#endif /* !LST_H */

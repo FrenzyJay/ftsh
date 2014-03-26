@@ -6,13 +6,28 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/26 22:31:36 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/26 23:16:18 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/27 00:35:57 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "lst.h"
+
+void	ft_destroy_tab(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free(tab);
+	tab = NULL;
+}
 
 void	ft_destroy_process(t_process **list)
 {

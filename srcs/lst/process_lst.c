@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:17:21 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/26 23:46:31 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/27 00:45:11 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void	ft_command_process(char **argv)
+static void			ft_command_process(char **argv)
 {
 	int		i;
 	int		j;
@@ -34,7 +34,7 @@ static void	ft_command_process(char **argv)
 	}
 }
 
-void		ft_view_info_process(t_process *cursor)
+static void			ft_view_info_process(t_process *cursor)
 {
 	char		*state_m[4];
 	int			index;
@@ -49,7 +49,7 @@ void		ft_view_info_process(t_process *cursor)
 	ft_command_process(cursor->argv);
 }
 
-void		ft_viewlist_process(t_process *list)
+void				ft_viewlist_process(t_process *list)
 {
 	t_process	*cursor;
 
@@ -72,7 +72,7 @@ void		ft_viewlist_process(t_process *list)
 	}
 }
 
-t_process	*ft_create_process(pid_t pid, char **argv)
+static t_process	*ft_create_process(pid_t pid, char **argv)
 {
 	t_process	*new;
 
@@ -91,7 +91,7 @@ t_process	*ft_create_process(pid_t pid, char **argv)
 	return (new);
 }
 
-void		ft_add_process(t_process **list, pid_t pid, char **argv)
+void				ft_add_process(t_process **list, pid_t pid, char **argv)
 {
 	t_process	*new;
 	t_process	*cursor;
