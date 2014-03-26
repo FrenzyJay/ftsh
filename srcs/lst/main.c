@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:39:35 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/26 14:17:51 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/26 19:33:57 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int		main(int ac, char **av, char **env)
 	tab_p[2] = 1002;
 	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
 	tab_p[0] = 2000;
-	tab_p[1] = 2001;
-	tab_p[2] = 2002;
-	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
+//	tab_p[1] = 2001;
+//	tab_p[2] = 2002;
+	ft_add_job(&lstj, tab_p, 1,  "lol i dont know what i do");
 	tab_p[0] = 3000;
 	tab_p[1] = 3001;
 	tab_p[2] = 3002;
@@ -83,12 +83,12 @@ int		main(int ac, char **av, char **env)
 	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
 	tab_p[0] = 8000;
 	tab_p[1] = 8001;
-	tab_p[2] = 8002;
-	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
+//	tab_p[2] = 8002;
+	ft_add_job(&lstj, tab_p, 2,  "lol i dont know | what i do");
 	tab_p[0] = 9000;
-	tab_p[1] = 9001;
-	tab_p[2] = 9002;
-	ft_add_job(&lstj, tab_p, 3,  "lol i | dont know what | i do");
+//	tab_p[1] = 9001;
+//	tab_p[2] = 9002;
+	ft_add_job(&lstj, tab_p, 1,  "lol i dont know what i do");
 	tab_p[0] = 1110;
 	tab_p[1] = 1111;
 	tab_p[2] = 1112;

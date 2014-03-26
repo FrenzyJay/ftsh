@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:05:14 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/26 18:56:52 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/26 19:43:18 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,27 @@ typedef struct			s_process
 	struct s_process	*next;
 }						t_process;
 
-typedef struct		s_job
+typedef struct			s_job
 {
-	int				num;
-	char			recent;
-	t_process		*first_process;
-	pid_t			pgid;
-	char			*command;
-	struct s_job	*next;
-	struct s_job	*prev;
+	int					num;
+	char				recent;
+	t_process			*first_process;
+	pid_t				pgid;
+	char				*command;
+	struct s_job		*next;
+	struct s_job		*prev;
 /*	char			notified;
 	struct termios	tmodes;
 	int				stdin;
 	int				stdout;
 	int				stderr;*/
-}					t_job;
+}						t_job;
 
 void	ft_viewlist_process(t_process *list);
 void	ft_add_process(t_process **list, pid_t pid, char **argv);
 
 void	ft_viewlist_job(t_job *lstjob);
-void	ft_add_job(t_job **lst_j, pid_t *process, int size,  char *cmd);
+void	ft_add_job(t_job **lst_j, pid_t *process, int size, char *cmd);
 
 void	ft_determine_recent(t_job **list);
 int		ft_min_num_job(t_job *lst);
