@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:12 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/26 05:31:48 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/26 18:12:27 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,21 @@
 #include "readline.h"
 
 /*
-** Signals switch
+** Arg tab size
 */
-void	signals_switch()
+int		ft_arg_size(t_node *node)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGTSTP, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGTERM, SIG_DFL);
+	if (!node || node->token != tok_expr)
+		return (0);
+	return (1 + ft_arg_size(node->right));
+}
+
+void	ft_concat_value(char **tab, t_node *node, int i)
+{
+	if (!node)
+		return ;
+	tab[i] = ft_strdup(node->value);
+	ft_concat_value(tab, node->right, i + 1);
 }
 
 /*
@@ -32,60 +39,63 @@ void	signals_switch()
 */
 char	**ft_concat_expr(t_node *node)
 {
-	t_node	*curs;
 	char	**fresh;
 	int		i;
 
-	curs = node;
-	i = 0;
-	while (curs)
-	{
-		i++;
-		curs = curs->right;
-	}
+	i = ft_arg_size(node);
 	if ((fresh = (char **)malloc(sizeof(char *) * (i + 1))) == NULL)
 		return (NULL);
-	curs = node;
-	i = 0;
-	while (curs)
-	{
-		fresh[i] = ft_strdup(curs->value);
-		curs = curs->right;
-		i++;
-	}
+	ft_concat_value(fresh, node, 0);
 	fresh[i] = NULL;
 	return (fresh);
 }
 
-int	process_cmd(t_node *ast, t_shenv **env)
+int		exec_cmd(t_node *curs, t_shenv **env)
 {
-	t_node	*curs;
-	int		father;
 	char	**arg;
+	int		father;
 
-	curs = ast;
-	while (curs)
+	if ((arg = ft_concat_expr(curs)) == NULL)
+		return (1);
+	father = fork();
+	if (father != 0)
 	{
-		if (curs && curs->token == tok_expr)
-		{
-			arg = ft_concat_expr(curs);
-			default_term_mode();
-			father = fork();
-			if (father != 0)
-			{
-				wait(NULL);
-				ft_destroy_env(arg);
-			}
-			else
-			{
-				signals_switch();
-				execve(arg[0], arg, (*env)->env);
-				ft_putendl("Gros fail");
-				exit(EXIT_FAILURE);
-			}
-		}
-		curs = curs->left;
+		wait(NULL);
+		ft_destroy_env(arg);
+	}
+	else
+	{
+		signals_switch();
+		execve(arg[0], arg, (*env)->env);
+		ft_putendl("Gros fail");
+		exit(EXIT_FAILURE);
 	}
 	return (0);
+}
+
+int		ft_exec_pipeline(t_node *curs, t_shenv **env)
+{
+	(void)curs;
+	(void)env;
+	return (0);
+}
+
+void	process_cmd(t_node *ast, t_shenv **env)
+{
+	ft_putendl("fck");
+	if (!ast)
+		return ;
+	if (ast->token == tok_expr)
+	{
+		exec_cmd(ast, env);
+	}
+	else if (ast->token == tok_pipe)
+	{
+		ft_exec_pipeline(ast, env);
+	}
+	write(1, "\n\n", 2);
+	ft_put_ast(ast, 0);
+	write(1, "\n\n", 2);
+	process_cmd(ast->left, env);
 }
 
