@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:20 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/26 05:51:24 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/26 06:00:43 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,10 @@ int 	main(int argc, char **argv)
 	if (argc > 1)
 		return (ft_error(argv[0]));
 	ft_putendl("~~ Hum ಠ_ಠ ~~ \n");
-
 	env = sh_init();
-	signals_inhibit();
 	if (env && env->env)
 	{
+		signals_inhibit();
 		shell_core(&env);
 		sh_desinit(&env);
 	}
