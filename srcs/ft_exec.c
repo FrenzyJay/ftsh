@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -34,6 +35,18 @@ void	ft_concat_value(char **tab, t_node *node, int i)
 	ft_concat_value(tab, node->right, i + 1);
 }
 
+void	putsplit(char **tab)
+{
+  int	i;
+
+  i = 0;
+  while (tab && tab[i])
+    {
+      ft_putendl(tab[i]);
+      i++;
+      }
+}
+
 /*
 ** En attendant le parseur d'expr :)
 */
@@ -55,20 +68,34 @@ int		exec_cmd(t_node *curs, t_shenv **env)
 	char	**arg;
 	int		father;
 
+	ft_putendl("--DEBUT D EXEC DE COMMANDE / exec_cmd");
+
+  printf("---- AVANT CONCAT ----------------------------------------------------------------------------------- %p -------------\n", curs);
+
+
 	if ((arg = ft_concat_expr(curs)) == NULL)
-		return (1);
+		return (1);	
+
+  printf("---- APRES CONCAT ------------------------------------------------------------------------------------ %p -------------\n", curs);
+
+	putsplit(arg);
 	father = fork();
-	if (father != 0)
-	{
-		wait(NULL);
-		ft_destroy_env(arg);
-	}
-	else
+	if (!father)
 	{
 		signals_switch();
+
+
+		ft_putendl("---LANCEMENT EXECVE / exec_cmd");
+
 		execve(arg[0], arg, (*env)->env);
 		ft_putendl("Gros fail");
 		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		wait(NULL);
+		ft_putendl("--FIN D EXEC DE COMMANDE / exec_cmd");
+		ft_destroy_env(arg);
 	}
 	return (0);
 }
@@ -80,22 +107,31 @@ int		ft_exec_pipeline(t_node *curs, t_shenv **env)
 	return (0);
 }
 
+
 void	process_cmd(t_node *ast, t_shenv **env)
 {
-	ft_putendl("fck");
+
 	if (!ast)
 		return ;
+
+	printf("-DEBUT LECTURE DE TOKEN [%s] %p \n", ast->value, ast);
+
 	if (ast->token == tok_expr)
 	{
-		exec_cmd(ast, env);
+	  if (exec_cmd(ast, env))
+	    ft_putendl("wtf");
 	}
 	else if (ast->token == tok_pipe)
 	{
 		ft_exec_pipeline(ast, env);
 	}
-	write(1, "\n\n", 2);
-	ft_put_ast(ast, 0);
-	write(1, "\n\n", 2);
+	//	write(1, "\n\n", 2);//
+	//	ft_put_ast(ast, 0);//
+		write(1, "\n\n", 2);//
+	printf("-FIN DE LECTURE DE TOKEN [%s] %p -- PROCHAIN : %p \n", ast->value, ast, ast->left);
+
+
 	process_cmd(ast->left, env);
+
 }
 
