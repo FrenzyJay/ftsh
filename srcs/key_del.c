@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/05 17:12:11 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/25 17:41:44 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/26 19:15:50 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void				key_backspace(t_entry *user)
 {
 	int				i;
 
-	if (user->x_cursor == user->plen)
+	if (user->cursor <= 0)
 		return ;
-	i = user->x_cursor - 1 - user->plen;
+	i = user->cursor - 1;
 	while (user->current->cmd[i] != '\0')
 	{
 		user->current->cmd[i] = user->current->cmd[i + 1];
 		i++;
 	}
 	user->current->clen--;
-	user->x_cursor--;
+	user->cursor--;
 	put_cmd(user);
 }
 
@@ -45,7 +45,7 @@ void				key_delete(t_entry *user)
 {
 	int				i;
 
-	i = user->x_cursor - user->plen;
+	i = user->cursor;
 	while (user->current->cmd[i] != '\0')
 	{
 		user->current->cmd[i] = user->current->cmd[i + 1];

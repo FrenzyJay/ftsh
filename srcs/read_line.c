@@ -6,12 +6,13 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/25 18:12:49 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/25 18:14:06 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/26 20:44:55 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <termcap.h>
 #include "libft.h"
 #include "readline.h"
 
@@ -30,6 +31,8 @@ char				*read_line(void)
 	char			*buffer[4];
 	unsigned int	key;
 
+	raw_term_mode();
+	tputs(tgetstr("sc", NULL), 1, tputs_char);
 	key = 0;
 	init_entry(&user, historic);
 	while (key != RETURN)
@@ -38,14 +41,15 @@ char				*read_line(void)
 		read(0, buffer, 4);
 		key = *(unsigned int *)buffer;
 		if (key == CTRL_D)
-		{//////
-			default_term_mode();////
-			exit(1);// put builtin exit here
-		}/////
+		{
+			default_term_mode();
+			exit(1);
+		}
 		key_hook(key, &user);
 	}
 	add_to_historic(&user, &historic);
 	ft_putchar('\n');
+	default_term_mode();
 	return (user.current->cmd);
 }
 
@@ -59,8 +63,7 @@ static void			init_entry(t_entry *user, t_hlst *historic)
 	user->current = copy_historic(historic);
 	hlst_push_front(&(user->current), hlst_new(ft_strnew(RADIX)));
 	user->plen = put_prompt();
-	user->x_cursor = user->plen;
-	user->lines = 1;
+	user->cursor = 0;
 }
 
 /*

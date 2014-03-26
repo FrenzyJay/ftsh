@@ -6,7 +6,7 @@
 #    By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 18:33:50 by jvincent          #+#    #+#              #
-#    Updated: 2014/03/25 21:22:42 by jvincent         ###   ########.fr        #
+#    Updated: 2014/03/26 20:25:08 by jibanez          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -38,6 +38,7 @@ SRCS = 			srcs/main.c \
 				srcs/key_del.c \
 				srcs/key_hook.c \
 				srcs/key_travel.c \
+				srcs/move_cursor.c \
 				srcs/prompt.c \
 				srcs/puts.c \
 				srcs/read_line.c \

@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/05 17:46:09 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/25 17:42:03 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/26 20:19:10 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ void		key_end(t_entry *user)
 {
 	int		i;
 
-	i = 0;
+	i = user->cursor;
 	while (user->current->cmd[i] != '\0')
+	{
+		move_right(user);
+		user->cursor++;
 		i++;
-	user->x_cursor = i + user->plen;
-	tputs(tgoto(tgetstr("ch", NULL), 0, user->x_cursor), 1, tputs_char);
+	}
 }
 
 /*
@@ -35,8 +37,15 @@ void		key_end(t_entry *user)
 
 void		key_home(t_entry *user)
 {
-	user->x_cursor = user->plen;
-	tputs(tgoto(tgetstr("ch", NULL), 0, user->x_cursor), 1, tputs_char);
+	int		i;
+
+	i = user->cursor;
+	while (i > 0)
+	{
+		move_left(user);
+		user->cursor--;
+		i--;
+	}
 }
 
 /*
@@ -47,13 +56,19 @@ void		key_next_word(t_entry *user)
 {
 	int		i;
 
-	i = user->x_cursor - user->plen;
-	while (user->current->cmd[i] != ' ' && user->current->cmd[i] != '\0')
+	i = user->cursor;
+	while (user->current->cmd[i] != ' ' && i < user->current->clen)
+	{
 		i++;
-	while (user->current->cmd[i] == ' ')
+		user->cursor++;
+		move_right(user);
+	}
+	while (user->current->cmd[i] == ' ' && i < user->current->clen)
+	{
 		i++;
-	user->x_cursor = i + user->plen;
-	tputs(tgoto(tgetstr("ch", NULL), 0, user->x_cursor), 1, tputs_char);
+		user->cursor++;
+		move_right(user);
+	}
 }
 
 /*
@@ -64,11 +79,17 @@ void		key_prev_word(t_entry *user)
 {
 	int		i;
 
-	i = user->x_cursor - user->plen;
-	while (user->current->cmd[i - 1] == ' ')
+	i = user->cursor;
+	while (user->current->cmd[i - 1] == ' ' && i > 0)
+	{
 		i--;
+		user->cursor--;
+		move_left(user);
+	}
 	while (user->current->cmd[i - 1] != ' ' && i > 0)
+	{
 		i--;
-	user->x_cursor = i + user->plen;
-	tputs(tgoto(tgetstr("ch", NULL), 0, user->x_cursor), 1, tputs_char);
+		user->cursor--;
+		move_left(user);
+	}
 }
