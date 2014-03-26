@@ -6,7 +6,7 @@
 #    By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 18:33:50 by jvincent          #+#    #+#              #
-#    Updated: 2014/03/26 15:54:31 by jvincent         ###   ########.fr        #
+#    Updated: 2014/03/26 23:48:58 by jvincent         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,8 +14,8 @@ CC =			gcc
 NAME =			ftsh
 
 ifeq ($(DEBUG), 1)
-	FLAGS =	-g -Wall -Wextra -pedantic
-	CC = cc
+	FLAGS =	 -Wall -Wextra -pedantic
+	CC = cc -g
 else
 	FLAGS =	-Wall -Werror -Wextra -pedantic
 endif
