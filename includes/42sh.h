@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:52:40 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/24 02:38:08 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/26 03:44:27 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@
 # include "parser.h"
 
 extern char **environ;
-/*
-** EXEC
-*/
-int	exec_cmd(char *cmd);
+
+typedef struct	s_shenv
+{
+	char		**env;
+}				t_shenv;
 
 /*
 ** FT_EXEC.C
 */
-int		exec_cmd(char *cmd);
+int		process_cmd(t_node *ast, t_shenv **env);
 
 /*
 ** FT_ENV.C
