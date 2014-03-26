@@ -6,14 +6,14 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 17:03:43 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/26 18:43:30 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/26 19:12:28 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lst.h"
-#include "libft.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include "lst.h"
+#include "libft.h"
 
 void		ft_view_info_job(t_job *curs_j)
 {
@@ -57,28 +57,33 @@ void		ft_viewlist_job(t_job *lstjob)
 	}
 }
 
-t_job		*ft_create_job(t_job **lst_j, pid_t *tab_p, int size, char *cmd)
+void		ft_add_processtab(t_process **proc, pid_t *tp, char *cmd, int size)
 {
-	t_job		*new;
-	t_process	*process;
 	int			i;
 	char		**cmd_p;
 	char		**cmd_opt_p;
 
 	cmd_p = ft_strsplit(cmd, '|');
 	i = 0;
+	while (i < size)
+	{
+		cmd_opt_p = ft_strsplit(cmd_p[i], ' ');
+		ft_add_process(proc, tp[i], cmd_opt_p);
+		i++;
+	}
+}
+
+t_job		*ft_create_job(t_job **lst_j, pid_t *tab_p, int size, char *cmd)
+{
+	t_job		*new;
+	t_process	*process;
+
 	process = NULL;
 	new = (t_job *)malloc(sizeof(t_job));
 	if (new)
 	{
 		new->num = ft_min_num_job(*lst_j);
-		new->recent = '+';
-		while (i < size)
-		{
-			cmd_opt_p = ft_strsplit(cmd_p[i], ' ');
-			ft_add_process(&process, tab_p[i], cmd_opt_p);
-			i++;
-		}
+		ft_add_processtab(&process, tab_p, cmd, size);
 		new->first_process = process;
 		new->pgid = getpgid(tab_p[0]);
 		new->command = cmd;
@@ -90,7 +95,7 @@ t_job		*ft_create_job(t_job **lst_j, pid_t *tab_p, int size, char *cmd)
 
 void		ft_add_job(t_job **lst_j, pid_t *process, int size, char *cmd)
 {
-	t_job	*new;
+	t_job		*new;
 
 	new = ft_create_job(lst_j, process, size, cmd);
 	if (new)
