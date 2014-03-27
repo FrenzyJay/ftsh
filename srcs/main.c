@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:20 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 00:33:27 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 01:44:50 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		shell_core(t_shenv **env)
 		default_term_mode();
 		if (ast)
 			process_cmd(ast, env);
+		ft_ast_destroy(&ast);
 	}
 	return (0);
 }
@@ -58,5 +59,7 @@ int 	main(int argc, char **argv)
 		sh_desinit(&env);
 	}
 	return (0);
+	(void)argc;
+	(void)argv;
 }
 

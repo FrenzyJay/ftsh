@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/20 04:46:51 by garm              #+#    #+#             */
-/*   Updated: 2014/03/25 19:57:49 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 01:11:27 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ t_node	*ft_parse_redirections(t_lex *head, t_lex *tail, t_node *tree, int side)
 	{
 		if (TOK_IS_REDIRECTION(cursor->token))
 		{
-			tree = ft_ast_add(tree, cursor, side);
+			if (side == 'R')
+				ft_ast_stack_right(tree, cursor);
+			else
+				tree = ft_ast_add(tree, cursor, side);
 			side = 'R';
 		}
 		cursor = cursor->next;
@@ -97,7 +100,10 @@ t_node	*ft_parse_cmd(t_lex *head, t_lex *tail, t_node *tree, int side)
 	{
 		if (cursor->token == tok_expr)
 		{
-			tree = ft_ast_add(tree, cursor, side);
+			if (side == 'R')
+				ft_ast_stack_right(tree, cursor);
+			else
+				tree = ft_ast_add(tree, cursor, side);
 			side = 'R';
 		}
 		cursor = cursor->next;

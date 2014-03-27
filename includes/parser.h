@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 01:12:39 by garm              #+#    #+#             */
-/*   Updated: 2014/03/25 19:57:47 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 01:19:52 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_lex	*ft_lexer_end(t_lex *lex);
 /*
 ** debug.c
 */
-void	ft_put_ast(t_node *tree, int side);
+void	ft_put_ast(t_node *tree);
 char	*ft_toktostr(t_tok token);
 void	ft_putlex(t_lex *lex);
 
@@ -112,7 +112,9 @@ t_node	*ft_parse_cmd(t_lex *head, t_lex *tail, t_node *tree, int side);
 ** ast.c
 */
 t_node	*ft_ast_add(t_node *tree, t_lex *elem, char side);
+void	ft_ast_stack_right(t_node *tree, t_lex *elem);
 t_node	*ft_ast_rewind(t_node *tree);
+void	ft_ast_destroy(t_node **ast);
 
 /*
 ** parser_error.c
