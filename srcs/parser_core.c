@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/20 04:46:51 by garm              #+#    #+#             */
-/*   Updated: 2014/03/27 01:11:27 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 05:19:46 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_node	*ft_parse_redirections(t_lex *head, t_lex *tail, t_node *tree, int side)
 	cursor = head;
 	while (cursor && cursor != tail)
 	{
-		if (TOK_IS_REDIRECTION(cursor->token))
+		if (TOK_IS_RE(cursor->token))
 		{
 			if (side == 'R')
 				ft_ast_stack_right(tree, cursor);
@@ -85,7 +85,7 @@ t_node	*ft_parse_redirections(t_lex *head, t_lex *tail, t_node *tree, int side)
 			side = 'R';
 		}
 		cursor = cursor->next;
-		if (!(TOK_IS_REDIRECTION(cursor->token)) && (cursor->token != tok_expr))
+		if (!(TOK_IS_RE(cursor->token)) && (cursor->token != tok_expr))
 			break ;
 	}
 	return (ft_parse_cmd(head, tail, tree, side));
@@ -107,7 +107,7 @@ t_node	*ft_parse_cmd(t_lex *head, t_lex *tail, t_node *tree, int side)
 			side = 'R';
 		}
 		cursor = cursor->next;
-		if (!(TOK_IS_REDIRECTION(cursor->token)) && (cursor->token != tok_expr))
+		if (!(TOK_IS_RE(cursor->token)) && (cursor->token != tok_expr))
 			break ;
 	}
 	return (tree);

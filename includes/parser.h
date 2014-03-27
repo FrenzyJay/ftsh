@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 01:12:39 by garm              #+#    #+#             */
-/*   Updated: 2014/03/27 01:19:52 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 06:56:11 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,22 @@
 
 # define TOK_IS_LEFT_RE(T) ((T) == tok_read || (T) == tok_heredoc)
 # define TOK_IS_RIGHT_RE(T) ((T) == tok_write || (T) == tok_append)
-# define TOK_IS_REDIRECTION(T) (TOK_IS_LEFT_RE(T) || TOK_IS_RIGHT_RE(T))
+# define TOK_IS_RE(T) (TOK_IS_LEFT_RE(T) || TOK_IS_RIGHT_RE(T))
+# define TOK_IS_LOGIC(T) ((T) == tok_and || (T) == tok_or)
+# define TOK_IS_END(T) ((T) == tok_end || (T) == tok_bg)
+
+# define CHECK_EXPR_PARENT(T) ((T) == tok_subsh)
+# define CHECK_RE_PARENT(T) ((T) == tok_expr || (T) == tok_subsh)
+# define CHECK_END_PARENT(T) ((T) == tok_pipe || TOK_IS_LOGIC(T))
+# define CHECK_SUBSH_PARENT(T) ((T) == tok_subsh || (T) == tok_expr)
+
+# define CHECK_LOGIC_PARENT_2(T) (TOK_IS_LOGIC(T) || TOK_IS_END(T))
+# define CHECK_LOGIC_PARENT(T) ((T) == tok_pipe || CHECK_LOGIC_PARENT_2(T))
+
+# define CHECK_PIPE_PARENT_2(T) ((T) == tok_subsh || (T) == tok_expr)
+# define CHECK_PIPE_PARENT(T) (CHECK_PIPE_PARENT_2(T) || TOK_IS_RE(T))
+
+# define CHECK_PIPE(T) ((T) == tok_expr || TOK_IS_RE(T))
 
 typedef enum	e_tok
 {
@@ -119,7 +134,7 @@ void	ft_ast_destroy(t_node **ast);
 /*
 ** parser_error.c
 */
-char	*ft_parser_check_error(t_node **ast);
+char	*ft_parser_check_error(t_node *ast);
 
 #endif /* !PARSER_H */
 
