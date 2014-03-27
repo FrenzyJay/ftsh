@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/26 15:52:23 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/26 15:53:12 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 17:32:41 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_shenv	*sh_init()
 	fresh = (t_shenv *)malloc(sizeof(t_shenv));
 	if (fresh)
 		fresh->env = ft_cp_env(environ);
+	fresh->estatus = 0;
+	fresh->indexpipe = 0;
 	return (fresh);
 }
 

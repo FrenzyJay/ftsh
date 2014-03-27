@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:12 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 13:17:46 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 18:07:20 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,22 +85,35 @@ char	*ft_get_path(char *bin, char **env)
 }
 
 /*
-** Execute a solo cmd
+** Identify path
 */
-int		ft_exec_cmd(t_node *curs, t_shenv **env, int towait)
+int		ft_identify_path(char **arg, char **env)
 {
-	char	**arg;
+	int		i;
+	char	*path;
+
+	i = 0;
+	while (arg && arg[0] && arg[0][i])
+	{
+		if (arg[0][i] == '/')
+		{
+			if (access(arg[0], X_OK) != -1)
+				return (0);
+			return (1);
+		}
+		i++;
+	}
+	if ((path = ft_get_path(arg[0], env)) == NULL)
+		return (1);
+	free(arg[0]);
+	arg[0] = path;
+	return (0);
+}
+
+void	ft_process(char **arg, t_shenv **env, int towait)
+{
 	pid_t	father;
 
-	if ((arg = ft_concat_expr(curs)) == NULL)
-		return (1);
-	if (ft_is_builtin(arg, env))
-		return (0);
-	if ((arg[0] = ft_get_path(arg[0], (*env)->env)) == NULL)
-	{
-		write(2, "Command not found\n", 18);
-		return (127);
-	}
 	if (towait)
 		father = fork();
 	else
@@ -109,22 +122,41 @@ int		ft_exec_cmd(t_node *curs, t_shenv **env, int towait)
 	{
 		signals_switch();
 		execve(arg[0], arg, (*env)->env);
-		ft_putendl("Gros fail");
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		if (towait)
-			wait(NULL);
+			wait(&((*env)->estatus));
 		ft_destroy_tab(arg);
 	}
+}
+
+/*
+** Execute a solo cmd
+*/
+int		ft_exec_cmd(t_node *curs, t_shenv **env, int towait)
+{
+	char	**arg;
+
+	if ((arg = ft_concat_expr(curs)) == NULL)
+		return (1);
+	if (ft_is_builtin(arg, env))
+		return (0);
+	if (ft_identify_path(arg, (*env)->env))
+	{
+		ft_error("command not found", arg[0]);
+		(*env)->estatus = 1;
+		return (126);
+	}
+	ft_process(arg, env, towait);
 	return (0);
 }
 
 /*
 ** Process the pipeline
 */
-void	ft_pipe_recurs(t_node *curs, t_shenv **env)
+int		ft_pipe_recurs(t_node *curs, t_shenv **env)
 {
 	pid_t	father;
 	int		tube[2];
@@ -137,7 +169,7 @@ void	ft_pipe_recurs(t_node *curs, t_shenv **env)
 		dup2(tube[1], 1);
 		close(tube[1]);
 		ft_exec_pipeline(curs->left, env);
-		exit(0);
+		exit(1);
 	}
 	else
 	{
@@ -145,7 +177,7 @@ void	ft_pipe_recurs(t_node *curs, t_shenv **env)
 		dup2(tube[0], 0);
 		close(tube[0]);
 		ft_exec_cmd(curs->right, env, 0);
-		exit(0);
+		exit(1);
 	}
 }
 
@@ -156,12 +188,11 @@ int		ft_exec_pipeline(t_node *curs, t_shenv **env)
 {
 	if (curs)
 	{
+		(*env)->indexpipe++;
 		if (curs->token == tok_pipe)
-			ft_pipe_recurs(curs, env);
+			return (ft_pipe_recurs(curs, env));
 		else if (curs->token == tok_expr)
-		{
-			ft_exec_cmd(curs, env, 0);
-		}
+			return (ft_exec_cmd(curs, env, 0));
 	}
 	return (0);
 }
@@ -183,19 +214,47 @@ t_node	*ft_to_end(t_node *ast)
 	return (NULL);
 }
 
+t_node	*ft_to_next_sep_and(t_node *ast)
+{
+	t_node	*curs;
+
+	curs = ast;
+	while (curs)
+	{
+		if (curs->token == tok_end || curs->token == tok_or)
+			return (curs);
+		curs = curs->left;
+	}
+	return (NULL);
+}
+
+t_node	*ft_to_next_sep_or(t_node *ast)
+{
+	t_node	*curs;
+
+	curs = ast;
+	while (curs)
+	{
+		if (curs->token == tok_end || curs->token == tok_and)
+			return (curs);
+		curs = curs->left;
+	}
+	return (NULL);
+}
+
 void	process_cmd(t_node *ast, t_shenv **env)
 {
 	int	father;
 
 	if (!ast)
 		return ;
+	if (ast->token == tok_end || ast->token == tok_pipe)
+		(*env)->estatus = 0;
 	if (ast->token == tok_expr)
-	{
-		if (ft_exec_cmd(ast, env, 1))
-			ft_putendl("wtf");
-	}
+		ft_exec_cmd(ast, env, 1);
 	else if (ast->token == tok_pipe)
 	{
+		(*env)->indexpipe = 0;
 		father = fork();
 		if (!father)
 			ft_exec_pipeline(ast, env);
@@ -204,6 +263,10 @@ void	process_cmd(t_node *ast, t_shenv **env)
 	}
 	if (ast->token == tok_pipe)
 		process_cmd(ft_to_end(ast), env);
+	else if (ast->token == tok_and && (*env)->estatus == 1)
+		process_cmd(ft_to_next_sep_and(ast), env);
+	else if (ast->token == tok_or && (*env)->estatus == 0)
+		process_cmd(ft_to_next_sep_or(ast), env);
 	else
 		process_cmd(ast->left, env);
 }
