@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:17:21 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/27 01:02:45 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/27 02:18:42 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ static void			ft_command_process(char **argv)
 
 static void			ft_view_info_process(t_process *cursor)
 {
-	char		*state_m[4];
+	char		*state_m[5];
 	int			index;
 
-	state_m[0] = " done      ";
-	state_m[1] = " suspended ";
-	state_m[2] = " running   ";
-	state_m[3] = " continued ";
+	state_m[0] = " done       ";
+	state_m[1] = " suspended  ";
+	state_m[2] = " running    ";
+	state_m[3] = " continued  ";
+	state_m[4] = " terminated ";
 	ft_putnbr(cursor->pid);
 	index = cursor->state;
 	ft_putstr(state_m[index]);
