@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/05 17:46:09 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/26 20:19:10 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 13:52:08 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		key_home(t_entry *user)
 	i = user->cursor;
 	while (i > 0)
 	{
-		move_left(user);
+		move_left();
 		user->cursor--;
 		i--;
 	}
@@ -84,12 +84,12 @@ void		key_prev_word(t_entry *user)
 	{
 		i--;
 		user->cursor--;
-		move_left(user);
+		move_left();
 	}
 	while (user->current->cmd[i - 1] != ' ' && i > 0)
 	{
 		i--;
 		user->cursor--;
-		move_left(user);
+		move_left();
 	}
 }
