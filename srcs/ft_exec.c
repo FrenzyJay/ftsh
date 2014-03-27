@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:12 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 03:39:58 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 04:29:25 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "42sh.h"
-#include "readline.h"
 
 /*
 ** Arg tab size
@@ -75,9 +74,10 @@ int		ft_exec_cmd(t_node *curs, t_shenv **env)
 	return (0);
 }
 
-int		ft_exec_pipeline(t_node *curs, t_shenv **env, )
+int		ft_exec_pipeline(t_node *curs, t_shenv **env)
 {
-	
+	(void)curs;
+	(void)env;
 	return (0);
 }
 

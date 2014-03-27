@@ -6,7 +6,7 @@
 #    By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 18:33:50 by jvincent          #+#    #+#              #
-#    Updated: 2014/03/27 01:41:43 by jvincent         ###   ########.fr        #
+#    Updated: 2014/03/27 04:53:12 by jvincent         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -34,7 +34,6 @@ SRCS = 			srcs/main.c \
 				srcs/ft_exec.c \
 				srcs/ft_env.c \
 				srcs/ft_init.c \
-				srcs/ft_signals.c \
 				srcs/dyn_buff.c \
 				srcs/key_arrows.c \
 				srcs/key_del.c \
@@ -53,7 +52,13 @@ SRCS = 			srcs/main.c \
 				srcs/ast.c \
 				srcs/parser_error.c \
 				srcs/parser.c \
-				srcs/parser_core.c
+				srcs/parser_core.c \
+				srcs/ft_destroy_errting.c \
+				srcs/ft_process_lst.c \
+				srcs/ft_jobs_action.c \
+				srcs/ft_signals.c \
+				srcs/ft_jobs_lst.c \
+				srcs/ft_jobs_functions.c
 
 OBJ =			$(SRCS:.c=.o)
 
@@ -64,7 +69,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -sC libft
-	@$(CC) $(CFLAGS) $(FLAGS) -o $(NAME) $(OBJ) $(LDFLAGS)
+	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS)
 	@echo $(NAME) ok
 
 clean:

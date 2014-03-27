@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:52:40 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 01:41:19 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 04:28:06 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define FTSH_H
 
 # include "libft.h"
+# include "job.h"
 # include "parser.h"
+# include "readline.h"
+
 
 extern char **environ;
 
@@ -22,6 +25,11 @@ typedef struct	s_shenv
 {
 	char		**env;
 }				t_shenv;
+
+/*
+** MAIN
+*/
+t_job	*singleton(void);
 
 /*
 ** FT_INIT.C

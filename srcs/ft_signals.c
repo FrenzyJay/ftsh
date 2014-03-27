@@ -1,36 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signals.c                                       :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/03/26 15:50:11 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/26 15:50:55 by jvincent         ###   ########.fr       */
+/*   Created: 2014/03/24 15:04:43 by llapillo          #+#    #+#             */
+/*   Updated: 2014/03/27 04:38:37 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
+#include <sys/wait.h>
+#include "42sh.h"
 
-/*
-** Signals inhibiter
-*/
-void	signals_inhibit()
+static void	ft_sigchld(void)
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTERM, SIG_IGN);
+	int		status;
+	pid_t	pid;
+
+	while ((pid = waitpid(-1, &status, WNOHANG)) > 0)
+	{
+		ft_putendl("FDP");
+	}
 }
 
-/*
-** Signals switch
-*/
-void	signals_switch()
+static void	ft_sigint(void)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGTSTP, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGTERM, SIG_DFL);
+	ft_putendl("sigkill catch");
+}
+
+static void	ft_sigtstp(void)
+{
+	ft_putendl("sigstop catch");
+}
+
+void		signals_inhibit()
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGTERM, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGCONT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void		ft_signal_handler(int c)
+{
+	if (c == SIGINT)
+		ft_sigint();
+	else if (c == SIGTSTP)
+		ft_sigtstp();
+	else if (c == SIGCHLD)
+		ft_sigchld();
+}
+void		signals_switch()
+{
+	signal(SIGINT, ft_signal_handler);
+	signal(SIGTERM, ft_signal_handler);
+	signal(SIGTSTP, ft_signal_handler);
+	signal(SIGCONT, ft_signal_handler);
+	signal(SIGQUIT, ft_signal_handler);
 }
 

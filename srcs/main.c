@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:20 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 03:02:47 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 04:27:45 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 #include <stdlib.h>
 #include <signal.h>
 #include "42sh.h"
-#include "libft.h"
-#include "parser.h"
-#include "readline.h"
+
+/*
+** SINGLETON
+*/
+t_job	*singleton(void)
+{
+	static t_job	*jobs = NULL;
+
+	return (jobs);
+}
+
 
 /*
 ** SHELL CORE
 */
-int		shell_core(t_shenv **env)
+static int	shell_core(t_shenv **env)
 {
 	char	*cmd;
 	t_node	*ast;
@@ -44,7 +52,7 @@ int		shell_core(t_shenv **env)
 /*
 ** Main routine
 */
-int 	main(int argc, char **argv)
+int 		main(int argc, char **argv)
 {
 	t_shenv	*env;
 
@@ -58,7 +66,6 @@ int 	main(int argc, char **argv)
 		shell_core(&env);
 		sh_desinit(&env);
 		signals_switch();
-
 	}
 	return (0);
 }
