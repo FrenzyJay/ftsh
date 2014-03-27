@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:20 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 12:11:24 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 12:52:32 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*
 ** SINGLETON
 */
-t_job	*singleton(void)
+t_job		*singleton(void)
 {
 	static t_job	*jobs = NULL;
 
@@ -52,7 +52,7 @@ static int	shell_core(t_shenv **env)
 /*
 ** Main routine
 */
-int 		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_shenv	*env;
 
