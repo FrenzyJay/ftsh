@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 20:59:38 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 05:45:52 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 13:39:52 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,18 +107,15 @@ char	**ft_cd(char **args, char **env)
 */
 int		ft_is_builtin(char **arg, t_shenv **env)
 {
-	int	i;
-
 	if (!arg)
 		return (1);
-	i = ft_strlen(arg[0]);
-	if (!ft_strncmp(arg[0], "exit", i))
+	if (!ft_strequ(arg[0], "exit"))
 		ft_exit(arg);
-	else if (!ft_strncmp(arg[0], "cd", i))
+	else if (!ft_strequ(arg[0], "cd"))
 		(*env)->env = ft_cd(arg, (*env)->env);
-	else if (!ft_strncmp(arg[0], "env", i))
+	else if (!ft_strequ(arg[0], "env"))
 		ft_print_env((*env)->env);
-	else if (!ft_strncmp(arg[0], "setenv", i))
+	else if (!ft_strequ(arg[0], "setenv"))
 		(*env)->env = ft_built_set_env(arg, (*env)->env);
 	else
 		return (0);

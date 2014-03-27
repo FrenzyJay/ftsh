@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:12 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 12:49:51 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 13:17:46 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,15 +169,15 @@ int		ft_exec_pipeline(t_node *curs, t_shenv **env)
 /*
 ** Skip all the pipe and go to the next semi-colon
 */
-t_node	*ft_zap_pipe(t_node *ast)
+t_node	*ft_to_end(t_node *ast)
 {
 	t_node	*curs;
 
 	curs = ast;
 	while (curs)
 	{
-		if (curs->token == tok_expr)
-			return (curs->left);
+		if (curs->token == tok_end)
+			return (curs);
 		curs = curs->left;
 	}
 	return (NULL);
@@ -203,7 +203,7 @@ void	process_cmd(t_node *ast, t_shenv **env)
 			wait(NULL);
 	}
 	if (ast->token == tok_pipe)
-		process_cmd(ft_zap_pipe(ast), env);
+		process_cmd(ft_to_end(ast), env);
 	else
 		process_cmd(ast->left, env);
 }

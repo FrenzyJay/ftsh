@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:20 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 12:52:32 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 13:19:53 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static int	shell_core(t_shenv **env)
 	{
 		raw_term_mode();
 		cmd = read_line();
-		if (cmd && *cmd && ft_strncmp(cmd, "exit", 4) == 0)
-			break ;
 		ast = ft_parser(cmd);
 		default_term_mode();
 		if (ast)
