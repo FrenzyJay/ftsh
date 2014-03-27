@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:12 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 00:35:35 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 03:39:58 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,14 @@ char	**ft_concat_expr(t_node *node)
 	return (fresh);
 }
 
-int		exec_cmd(t_node *curs, t_shenv **env)
+int		ft_exec_cmd(t_node *curs, t_shenv **env)
 {
 	char	**arg;
 	int		father;
 
 	if ((arg = ft_concat_expr(curs)) == NULL)
 		return (1);	
+	
 	father = fork();
 	if (!father)
 	{
@@ -74,10 +75,9 @@ int		exec_cmd(t_node *curs, t_shenv **env)
 	return (0);
 }
 
-int		ft_exec_pipeline(t_node *curs, t_shenv **env)
+int		ft_exec_pipeline(t_node *curs, t_shenv **env, )
 {
-	(void)curs;
-	(void)env;
+	
 	return (0);
 }
 
@@ -89,8 +89,8 @@ void	process_cmd(t_node *ast, t_shenv **env)
 		return ;
 	if (ast->token == tok_expr)
 	{
-	  if (exec_cmd(ast, env))
-	    ft_putendl("wtf");
+		if (ft_exec_cmd(ast, env))
+			ft_putendl("wtf");
 	}
 	else if (ast->token == tok_pipe)
 	{

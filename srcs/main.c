@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:20 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 01:44:50 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 03:02:47 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int 	main(int argc, char **argv)
 		signals_inhibit();
 		shell_core(&env);
 		sh_desinit(&env);
+		signals_switch();
+
 	}
 	return (0);
-	(void)argc;
-	(void)argv;
 }
 
