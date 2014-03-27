@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/20 03:42:51 by garm              #+#    #+#             */
-/*   Updated: 2014/03/25 12:02:18 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 00:06:32 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_node		*ft_parser(char *entry)
 	lex = ft_lexer_end(lex);
 	tree = ft_parse_end(lex, NULL);
 	ft_lex_destroy(&lex);
-	return (tree);
+	return (ft_ast_rewind(tree));
 }
 
 t_lex		*ft_parser_find(t_lex *head, t_lex *tail, t_tok tok)

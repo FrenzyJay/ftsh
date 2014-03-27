@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/18 14:40:08 by garm              #+#    #+#             */
-/*   Updated: 2014/03/25 17:02:14 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 01:27:11 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,36 @@
 /*
 ** DISPLAY ABSTRACT SYNTAX TREE
 */
-void	ft_put_ast(t_node *tree, int side)
+void	ft_put_ast(t_node *ast)
 {
-	if (!tree)
-		return ;
-	if (side == 'L')
-		ft_putendl("");
-	ft_putstr(" -> ");
-	ft_putstr("[");
-	ft_putstr(ft_toktostr(tree->token));
-	ft_putstr("]");
-	ft_putstr(tree->value);
-	ft_put_ast(tree->right, 'R');
-	ft_put_ast(tree->left, 'L');
+	t_node	*temp;
+	t_node	*temp_right;
+
+	temp = ast;
+	if (ast)
+	{
+		while (temp)
+		{
+			ft_putstr("[");
+			ft_putstr(ft_toktostr(temp->token));
+			ft_putstr("] (");
+			ft_putstr(temp->value);
+			ft_putstr(")");
+			temp_right = temp->right;
+			while (temp_right)
+			{
+				ft_putstr(" -> [");
+				ft_putstr(ft_toktostr(temp_right->token));
+				ft_putstr("] (");
+				ft_putstr(temp_right->value);
+				ft_putstr(")");
+				temp_right = temp_right->right;
+			}
+			if (temp->left)
+				ft_putendl("\n|\nV");
+			temp = temp->left;
+		}
+	}
 }
 
 /*
