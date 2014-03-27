@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/26 22:31:36 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/27 00:35:57 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/27 01:09:33 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_destroy_process(t_process **list)
 	while (42)
 	{
 		tmp = cursor->next;
+		ft_destroy_tab(cursor->argv);
 		free(cursor);
 		cursor = NULL;
 		cursor = tmp;

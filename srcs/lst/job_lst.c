@@ -6,7 +6,7 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 17:03:43 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/27 00:52:40 by llapillo         ###   ########.fr       */
+/*   Updated: 2014/03/27 01:10:30 by llapillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static void		ft_add_proctb(t_process **proc, pid_t *tp, char *cmd, int size)
 		cmd_opt_p = ft_strsplit(cmd_p[i], ' ');
 		ft_add_process(proc, tp[i], cmd_opt_p);
 		i++;
-		ft_destroy_tab(cmd_opt_p);
 	}
 	ft_destroy_tab(cmd_p);
 }
