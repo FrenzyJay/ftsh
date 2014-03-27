@@ -32,8 +32,7 @@ typedef struct		s_entry
 {
 	struct s_hlst	*current;
 	int				plen;
-	int				x_cursor;
-	int				lines;
+	int				cursor;
 }					t_entry;
 
 typedef struct		s_key_func
@@ -70,6 +69,8 @@ char		*dynbuff(char *buff, int len, int add);
 int			get_cols(void);
 void		key_hook(unsigned int key, t_entry *user);
 void		key_right(t_entry *user);
+void		move_right(t_entry *user);
+void		move_left(void);
 void		key_left(t_entry *user);
 void		key_up(t_entry *user);
 void		key_down(t_entry *user);
