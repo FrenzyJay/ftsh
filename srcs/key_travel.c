@@ -6,17 +6,13 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/05 17:46:09 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/27 17:20:01 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 19:16:04 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <termcap.h>
 #include <string.h>
 #include <readline.h>
-
-/*
-** Move the cursor to the end of the current command line
-*/
 
 void		key_end(t_entry *user)
 {
@@ -31,10 +27,6 @@ void		key_end(t_entry *user)
 	}
 }
 
-/*
-** Move the cursor to the begining of the current command line
-*/
-
 void		key_home(t_entry *user)
 {
 	int		i;
@@ -47,10 +39,6 @@ void		key_home(t_entry *user)
 		i--;
 	}
 }
-
-/*
-** Move the cursor to the next word on the current command line
-*/
 
 void		key_next_word(t_entry *user)
 {
@@ -70,10 +58,6 @@ void		key_next_word(t_entry *user)
 		user->cursor++;
 	}
 }
-
-/*
-** Move the cursor to the previous word on the current command line
-*/
 
 void		key_prev_word(t_entry *user)
 {

@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/02 11:46:44 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/25 17:59:25 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 19:42:38 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "readline.h"
-
-/*
-** Get the termcap database
-*/
 
 static void			get_termcap(void)
 {
@@ -45,10 +41,6 @@ static void			get_termcap(void)
 	}
 }
 
-/*
-** Get a struct termios and unset the canonic and echo mode
-*/
-
 void				raw_term_mode(void)
 {
 	struct termios	term;
@@ -60,11 +52,6 @@ void				raw_term_mode(void)
 	term.c_cc[VTIME] = 0;
 	tcsetattr(0, 0, &term);
 }
-
-/*
-** Reset the default terminal mode at the end of the program
-** or when certain signals are caught
-*/
 
 void				default_term_mode(void)
 {

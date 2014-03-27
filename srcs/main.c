@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:20 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 18:31:43 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 20:43:46 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static int	shell_core(t_shenv **env)
 	while (42)
 	{
 		cmd = read_line();
+		ft_putendl(cmd);
 		ast = ft_parser(cmd);
 		if (ast)
 			process_cmd(ast, env);

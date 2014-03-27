@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/25 18:12:49 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/27 18:31:10 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 19:43:21 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,35 @@
 #include "libft.h"
 #include "readline.h"
 
-static void			init_entry(t_entry *user, t_hlst *historic);
-static t_hlst		*copy_historic(t_hlst *historic);
-static void			exit_ftsh(void);
+static t_hlst		*copy_historic(t_hlst *historic)
+{
+	t_hlst			*new;
 
-/*
-** Get the user entry and return it when return key is press
-*/
+	new = NULL;
+	while (historic)
+	{
+		hlst_push_back(&new, hlst_new(ft_strdup(historic->cmd)));
+		historic = historic->next;
+	}
+	return (new);
+}
+
+static void			init_entry(t_entry *user, t_hlst *historic)
+{
+	raw_term_mode();
+	tputs(tgetstr("sc", NULL), 1, tputs_char);
+	user->current = copy_historic(historic);
+	hlst_push_front(&(user->current), hlst_new(ft_strnew(RADIX)));
+	user->plen = put_prompt();
+	user->cursor = 0;
+}
+
+static void			exit_ftsh(void)
+{
+	write(1, "\n", 1);
+	default_term_mode();
+	exit(0);
+}
 
 char				*read_line(void)
 {
@@ -31,8 +53,6 @@ char				*read_line(void)
 	char			*buffer[4];
 	unsigned int	key;
 
-	raw_term_mode();
-	tputs(tgetstr("sc", NULL), 1, tputs_char);
 	key = 0;
 	init_entry(&user, historic);
 	while (key != RETURN)
@@ -52,41 +72,4 @@ char				*read_line(void)
 	ft_putchar('\n');
 	default_term_mode();
 	return (user.current->cmd);
-}
-
-
-/*
-** Init the t_entry struct and put the prompt
-*/
-
-static void			init_entry(t_entry *user, t_hlst *historic)
-{
-	user->current = copy_historic(historic);
-	hlst_push_front(&(user->current), hlst_new(ft_strnew(RADIX)));
-	user->plen = put_prompt();
-	user->cursor = 0;
-}
-
-/*
-** Copy the historic t_hlst
-*/
-
-static t_hlst		*copy_historic(t_hlst *historic)
-{
-	t_hlst			*new;
-
-	new = NULL;
-	while (historic)
-	{
-		hlst_push_back(&new, hlst_new(ft_strdup(historic->cmd)));
-		historic = historic->next;
-	}
-	return (new);
-}
-
-static void			exit_ftsh(void)
-{
-	write(1, "\n", 1);
-	default_term_mode();
-	exit(0);
 }
