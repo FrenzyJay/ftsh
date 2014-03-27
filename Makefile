@@ -6,7 +6,7 @@
 #    By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 18:33:50 by jvincent          #+#    #+#              #
-#    Updated: 2014/03/27 16:19:39 by jvincent         ###   ########.fr        #
+#    Updated: 2014/03/27 11:11:18 by garm             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -53,6 +53,7 @@ SRCS = 			srcs/main.c \
 				srcs/tokens_utils.c \
 				srcs/ast.c \
 				srcs/parser_error.c \
+				srcs/parser_ambiguous.c \
 				srcs/parser.c \
 				srcs/parser_core.c \
 				srcs/ft_destroy_errting.c \
