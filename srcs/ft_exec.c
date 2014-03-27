@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:12 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 18:07:20 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 18:35:12 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	ft_process(char **arg, t_shenv **env, int towait)
 	else
 	{
 		if (towait)
-			wait(&((*env)->estatus));
+			wait(&g_lastc);
 		ft_destroy_tab(arg);
 	}
 }
@@ -146,7 +146,7 @@ int		ft_exec_cmd(t_node *curs, t_shenv **env, int towait)
 	if (ft_identify_path(arg, (*env)->env))
 	{
 		ft_error("command not found", arg[0]);
-		(*env)->estatus = 1;
+		g_lastc = 1;
 		return (126);
 	}
 	ft_process(arg, env, towait);
@@ -158,8 +158,8 @@ int		ft_exec_cmd(t_node *curs, t_shenv **env, int towait)
 */
 int		ft_pipe_recurs(t_node *curs, t_shenv **env)
 {
-	pid_t	father;
-	int		tube[2];
+	pid_t				father;
+	int					tube[2];
 
 	pipe(tube);
 	father = fork();
@@ -249,7 +249,7 @@ void	process_cmd(t_node *ast, t_shenv **env)
 	if (!ast)
 		return ;
 	if (ast->token == tok_end || ast->token == tok_pipe)
-		(*env)->estatus = 0;
+		g_lastc = 0;
 	if (ast->token == tok_expr)
 		ft_exec_cmd(ast, env, 1);
 	else if (ast->token == tok_pipe)
@@ -263,9 +263,9 @@ void	process_cmd(t_node *ast, t_shenv **env)
 	}
 	if (ast->token == tok_pipe)
 		process_cmd(ft_to_end(ast), env);
-	else if (ast->token == tok_and && (*env)->estatus == 1)
+	else if (ast->token == tok_and && g_lastc == 1)
 		process_cmd(ft_to_next_sep_and(ast), env);
-	else if (ast->token == tok_or && (*env)->estatus == 0)
+	else if (ast->token == tok_or && g_lastc == 0)
 		process_cmd(ft_to_next_sep_or(ast), env);
 	else
 		process_cmd(ast->left, env);

@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:52:40 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 17:28:05 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 18:28:36 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 
 
 extern char **environ;
+int			g_lastc;
 
 typedef struct	s_shenv
 {
 	char		**env;
-	int			estatus;
 	int			indexpipe;
 }				t_shenv;
 
