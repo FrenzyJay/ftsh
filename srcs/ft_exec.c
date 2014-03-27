@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:12 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 07:40:47 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 12:49:51 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ int		ft_exec_cmd(t_node *curs, t_shenv **env, int towait)
 	pid_t	father;
 
 	if ((arg = ft_concat_expr(curs)) == NULL)
-		return (1);	
+		return (1);
 	if (ft_is_builtin(arg, env))
 		return (0);
 	if ((arg[0] = ft_get_path(arg[0], (*env)->env)) == NULL)
 	{
-		ft_putendl("Command not found");
-		return (0);
+		write(2, "Command not found\n", 18);
+		return (127);
 	}
 	if (towait)
 		father = fork();
@@ -116,7 +116,7 @@ int		ft_exec_cmd(t_node *curs, t_shenv **env, int towait)
 	{
 		if (towait)
 			wait(NULL);
-		ft_destroy_env(arg);
+		ft_destroy_tab(arg);
 	}
 	return (0);
 }
@@ -137,14 +137,15 @@ void	ft_pipe_recurs(t_node *curs, t_shenv **env)
 		dup2(tube[1], 1);
 		close(tube[1]);
 		ft_exec_pipeline(curs->left, env);
+		exit(0);
 	}
 	else
 	{
 		close(tube[1]);
 		dup2(tube[0], 0);
 		close(tube[0]);
-		if (ft_exec_cmd(curs->right, env, 0) == 0)
-			exit(1);
+		ft_exec_cmd(curs->right, env, 0);
+		exit(0);
 	}
 }
 
@@ -155,10 +156,12 @@ int		ft_exec_pipeline(t_node *curs, t_shenv **env)
 {
 	if (curs)
 	{
-		if (curs->token == tok_expr)
-			ft_exec_cmd(curs, env, 0);
-		else if (curs->token == tok_pipe)
+		if (curs->token == tok_pipe)
 			ft_pipe_recurs(curs, env);
+		else if (curs->token == tok_expr)
+		{
+			ft_exec_cmd(curs, env, 0);
+		}
 	}
 	return (0);
 }
@@ -198,8 +201,10 @@ void	process_cmd(t_node *ast, t_shenv **env)
 			ft_exec_pipeline(ast, env);
 		else
 			wait(NULL);
-		ast = ft_zap_pipe(ast);
 	}
-	process_cmd(ast->left, env);
+	if (ast->token == tok_pipe)
+		process_cmd(ft_zap_pipe(ast), env);
+	else
+		process_cmd(ast->left, env);
 }
 
