@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 01:12:39 by garm              #+#    #+#             */
-/*   Updated: 2014/03/27 09:45:37 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 17:10:37 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 # define NB_TOKVALS 12
 # define NB_TOKENS 15
 # define FT_ISQUOTE(C) (C == '\'' || C == '"' || C == '`')
+
+# define STATE_ERROR -3
+# define STATE_ERROR_OUTPUT -2
+# define STATE_ERROR_INPUT -1
+# define STATE_NORW 0
+# define STATE_READ 1
+# define STATE_WRITE 2
+# define STATE_RW 3
 
 # define TOK_IS_LEFT_RE(T) ((T) == tok_read || (T) == tok_heredoc)
 # define TOK_IS_RIGHT_RE(T) ((T) == tok_write || (T) == tok_append)
@@ -135,6 +143,13 @@ void	ft_ast_destroy(t_node **ast);
 ** parser_error.c
 */
 char	*ft_parser_check_error(t_node *ast);
+
+/*
+** parser_ambiguous.c
+*/
+char	*ft_parser_check_ambiguous(t_node *ast, char *errormsg, int state);
+/*char	*ft_parser_check_pipes(t_node *ast, char *errormsg, int state);*/
+
 
 #endif /* !PARSER_H */
 
