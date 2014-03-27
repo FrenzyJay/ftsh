@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/25 17:44:00 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/26 23:23:26 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 17:59:52 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct		s_hlst
 {
 	char			*cmd;
 	int				clen;
-	int				lines;
 	struct s_hlst	*next;
 	struct s_hlst	*prev;
 }					t_hlst;
@@ -70,7 +69,7 @@ int			get_cols(void);
 void		key_hook(unsigned int key, t_entry *user);
 void		key_right(t_entry *user);
 void		move_right(t_entry *user);
-void		move_left(void);
+void		move_left(t_entry *user);
 void		key_left(t_entry *user);
 void		key_up(t_entry *user);
 void		key_down(t_entry *user);
@@ -85,5 +84,6 @@ int			tputs_char(int c);
 t_hlst		*hlst_new(char *cmd);
 void		hlst_push_front(t_hlst **adlst, t_hlst *new);
 void		hlst_push_back(t_hlst **adlst, t_hlst *new);
+void		ft_destroy_hlst(t_hlst *historic);
 
 #endif /* !READLINE_H */

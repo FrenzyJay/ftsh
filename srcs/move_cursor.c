@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/26 20:14:08 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/26 20:41:15 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 17:11:33 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void		move_right(t_entry *user)
 		tputs(tgetstr("nd", NULL), 1, tputs_char);
 }
 
-void		move_left(void)
+void		move_left(t_entry *user)
 {
+	(void)user;
 	tputs(tgetstr("le", NULL), 1, tputs_char);
 }

@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/15 20:03:25 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/26 20:46:32 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 16:26:06 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		replace_cursor(t_entry *user)
 	i = user->current->clen;
 	while (i > user->cursor)
 	{
-		move_left();
+		move_left(user);
 		i--;
 	}
 }

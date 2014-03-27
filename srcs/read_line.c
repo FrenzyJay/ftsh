@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/25 18:12:49 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/26 20:44:55 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 18:31:10 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static void			init_entry(t_entry *user, t_hlst *historic);
 static t_hlst		*copy_historic(t_hlst *historic);
-static void			add_to_historic(t_entry *user, t_hlst **historic);
+static void			exit_ftsh(void);
 
 /*
 ** Get the user entry and return it when return key is press
@@ -41,13 +41,14 @@ char				*read_line(void)
 		read(0, buffer, 4);
 		key = *(unsigned int *)buffer;
 		if (key == CTRL_D)
-		{
-			default_term_mode();
-			exit(1);
-		}
+			exit_ftsh();
 		key_hook(key, &user);
 	}
-	add_to_historic(&user, &historic);
+	if (user.current->cmd[0] != '\0')
+		hlst_push_front(&historic, hlst_new(ft_strdup(user.current->cmd)));
+	while (user.current->prev)
+		user.current = user.current->prev;
+	ft_destroy_hlst(user.current);
 	ft_putchar('\n');
 	default_term_mode();
 	return (user.current->cmd);
@@ -83,12 +84,9 @@ static t_hlst		*copy_historic(t_hlst *historic)
 	return (new);
 }
 
-/*
-** Add the last used command to the historic list
-*/
-
-static void			add_to_historic(t_entry *user, t_hlst **historic)
+static void			exit_ftsh(void)
 {
-	if (user->current->cmd[0] != '\0')
-		hlst_push_front(historic, hlst_new(ft_strdup(user->current->cmd)));
+	write(1, "\n", 1);
+	default_term_mode();
+	exit(0);
 }

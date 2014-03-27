@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/05 13:50:26 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/27 13:51:36 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 16:25:46 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		key_left(t_entry *user)
 {
 	if (user->cursor <= 0)
 		return ;
-	move_left();
+	move_left(user);
 	user->cursor--;
 }
 
