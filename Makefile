@@ -6,7 +6,7 @@
 #    By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 18:33:50 by jvincent          #+#    #+#              #
-#    Updated: 2014/03/27 04:53:12 by jvincent         ###   ########.fr        #
+#    Updated: 2014/03/27 05:26:20 by jvincent         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -33,6 +33,7 @@ LIB = 			libft
 SRCS = 			srcs/main.c \
 				srcs/ft_exec.c \
 				srcs/ft_env.c \
+				srcs/ft_builtin.c \
 				srcs/ft_init.c \
 				srcs/dyn_buff.c \
 				srcs/key_arrows.c \

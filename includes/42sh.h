@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:52:40 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 04:28:06 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 05:25:59 by jvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ char	**ft_unset_env(char **env, char *key);
 */
 void	signals_inhibit();
 void	signals_switch();
+
+/*
+** FT_BUILTIN.C
+*/
+int		ft_is_builtin(char **arg, t_shenv **env);
 
 #endif /* !FTSH_H */
 
