@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/25 16:12:28 by garm              #+#    #+#             */
-/*   Updated: 2014/03/27 07:12:58 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 09:51:10 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,35 @@ static int		ft_check_pipe(t_node *ast)
 		}
 	}
 	return (0);
+}
+
+static char		*ft_is_error_redirection(t_node *ast)
+{
+	t_node	*cursor;
+	int		presence_expr;
+
+	presence_expr = 0;
+	if (ast && TOK_IS_RE(ast->token))
+	{
+		cursor = ast;
+		while (cursor)
+		{
+			if (cursor->token == tok_expr || cursor->token == tok_subsh)
+			{
+				presence_expr = 1;
+				break ;
+			}
+			cursor = cursor->right;
+		}
+	}
+	else
+		return (NULL);
+	if (presence_expr)
+		return (NULL);
+	else if (ast && TOK_IS_RE(ast->token))
+		return (ast->value);
+	else
+		return ("NULL");
 }
 
 static char		*ft_is_error(t_node *ast)
@@ -65,6 +94,8 @@ static char		*ft_parse_error(t_node *ast, char *errormsg)
 	if (ast)
 	{
 		if (!errormsg)
+			errormsg = ft_is_error_redirection(ast);
+		if (!errormsg)
 			errormsg = ft_is_error(ast);
 		errormsg = ft_parse_error(ast->left, errormsg);
 		errormsg = ft_parse_error(ast->right, errormsg);
@@ -78,7 +109,13 @@ char			*ft_parser_check_error(t_node *ast)
 	char	*tokval;
 
 	if ((tokval = ft_parse_error(ast, NULL)))
+	{
+		if (ft_strncmp("NULL", tokval, 4) == 0)
+			ft_putendl("Invalid null command.");
+		else
+			ft_printf("ftsh: parse error near `%s'\n", tokval);
 		return (tokval);
+	}
 	/*
 	if ((tokval = ft_ambiguous(ast)))
 		return (tokval);

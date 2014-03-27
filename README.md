@@ -1,7 +1,9 @@
 42sh
 ====
 
-<<<<<<< HEAD
+Update 25/03/2014 :
+	 Note ! merge : master / lexer / read_line
+	 Pensez a branch le nouveau master :)
 
 
 | :date: Update date | Description | Note |
@@ -18,9 +20,5 @@ Libft :
 	 A compiler avec la lib : https://github.com/FrenzyJay/libft
 
 Help :
-<<<<<<< HEAD
 	 http://tinyurl.com/kw9kbgg
 
-=======
-  http://tinyurl.com/kw9kbgg
->>>>>>> jobcontrol
