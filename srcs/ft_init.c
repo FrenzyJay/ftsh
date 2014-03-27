@@ -6,12 +6,12 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/26 15:52:23 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 17:32:41 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 19:26:44 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "42sh.h"
+#include "ftsh.h"
 
 /*
 ** Init sequence

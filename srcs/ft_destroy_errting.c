@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_list.c                                     :+:      :+:    :+:   */
+/*   ft_destroy_errting.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/03/26 22:31:36 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/27 04:30:46 by jvincent         ###   ########.fr       */
+/*   Created: 2014/03/27 17:32:03 by jibanez           #+#    #+#             */
+/*   Updated: 2014/03/27 20:30:59 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "42sh.h"
+#include "ftsh.h"
 
 void	ft_destroy_tab(char **tab)
 {
@@ -69,4 +69,15 @@ void	ft_destroy_job(t_job **list)
 			break ;
 	}
 	*list = NULL;
+}
+
+void	ft_destroy_hlst(t_hlst *historic)
+{
+	if (!historic)
+		return ;
+	ft_destroy_hlst(historic->next);
+	free(historic->cmd);
+	historic->cmd = NULL;
+	free(historic);
+	historic = NULL;
 }

@@ -6,13 +6,13 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/20 03:42:51 by garm              #+#    #+#             */
-/*   Updated: 2014/03/27 10:02:27 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 19:27:48 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-#include "42sh.h"
+#include "ftsh.h"
 
 t_node		*ft_parser(char *entry)
 {

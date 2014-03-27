@@ -6,51 +6,12 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/18 14:40:08 by garm              #+#    #+#             */
-/*   Updated: 2014/03/27 09:30:41 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 19:32:36 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42sh.h"
+#include "ftsh.h"
 
-/*
-** DISPLAY ABSTRACT SYNTAX TREE
-*/
-void	ft_put_ast(t_node *ast)
-{
-	t_node	*temp;
-	t_node	*temp_right;
-
-	temp = ast;
-	if (ast)
-	{
-		while (temp)
-		{
-			ft_putstr("[");
-			ft_putstr(ft_toktostr(temp->token));
-			ft_putstr("] (");
-			ft_putstr(temp->value);
-			ft_putstr(")");
-			temp_right = temp->right;
-			while (temp_right)
-			{
-				ft_putstr(" -> [");
-				ft_putstr(ft_toktostr(temp_right->token));
-				ft_putstr("] (");
-				ft_putstr(temp_right->value);
-				ft_putstr(")");
-				temp_right = temp_right->right;
-			}
-			if (temp->left)
-				ft_putendl("\n|\nV");
-			temp = temp->left;
-		}
-		ft_putendl("");
-	}
-}
-
-/*
-** DISPLAY LEXING TABLE
-*/
 char	*ft_toktostr(t_tok token)
 {
 	char	*str[NB_TOKENS];
@@ -88,4 +49,3 @@ void	ft_putlex(t_lex *lex)
 		tmp = tmp->next;
 	}
 }
-

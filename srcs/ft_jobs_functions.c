@@ -6,12 +6,12 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 17:50:11 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/27 04:38:08 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 19:29:58 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "42sh.h"
+#include "ftsh.h"
 
 void		ft_determine_recent(t_job **list)
 {

@@ -6,13 +6,13 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/24 23:58:41 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/27 04:33:58 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 19:29:15 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <signal.h>
-#include "42sh.h"
+#include "ftsh.h"
 
 void	ft_check_process_tostop(t_process **lstprocess)
 {

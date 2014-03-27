@@ -6,7 +6,7 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:12 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 18:07:20 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 20:11:22 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "42sh.h"
+#include "ftsh.h"
 
 int		ft_exec_pipeline(t_node *curs, t_shenv **env);
 
-/*
-** Arg tab size
-*/
 int		ft_arg_size(t_node *node)
 {
 	if (!node || node->token != tok_expr)
@@ -36,9 +33,6 @@ void	ft_concat_value(char **tab, t_node *node, int i)
 	ft_concat_value(tab, node->right, i + 1);
 }
 
-/*
-** En attendant le parseur d'expr :)
-*/
 char	**ft_concat_expr(t_node *node)
 {
 	char	**fresh;
@@ -52,9 +46,6 @@ char	**ft_concat_expr(t_node *node)
 	return (fresh);
 }
 
-/*
-** Get the path of a cmd
-*/
 char	*ft_get_path(char *bin, char **env)
 {
 	char	**tpath;
@@ -84,9 +75,6 @@ char	*ft_get_path(char *bin, char **env)
 	return (NULL);
 }
 
-/*
-** Identify path
-*/
 int		ft_identify_path(char **arg, char **env)
 {
 	int		i;
@@ -132,9 +120,6 @@ void	ft_process(char **arg, t_shenv **env, int towait)
 	}
 }
 
-/*
-** Execute a solo cmd
-*/
 int		ft_exec_cmd(t_node *curs, t_shenv **env, int towait)
 {
 	char	**arg;
@@ -153,9 +138,6 @@ int		ft_exec_cmd(t_node *curs, t_shenv **env, int towait)
 	return (0);
 }
 
-/*
-** Process the pipeline
-*/
 int		ft_pipe_recurs(t_node *curs, t_shenv **env)
 {
 	pid_t	father;
@@ -181,9 +163,6 @@ int		ft_pipe_recurs(t_node *curs, t_shenv **env)
 	}
 }
 
-/*
-** Handle the pipeline
-*/
 int		ft_exec_pipeline(t_node *curs, t_shenv **env)
 {
 	if (curs)
@@ -197,9 +176,6 @@ int		ft_exec_pipeline(t_node *curs, t_shenv **env)
 	return (0);
 }
 
-/*
-** Skip all the pipe and go to the next semi-colon
-*/
 t_node	*ft_to_end(t_node *ast)
 {
 	t_node	*curs;

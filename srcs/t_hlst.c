@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 13:33:23 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/25 17:43:14 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 17:59:56 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_hlst			*hlst_new(char *cmd)
 		return (NULL);
 	new->cmd = cmd;
 	new->clen = ft_strlen(cmd);
-	new->lines = 0;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

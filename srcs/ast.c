@@ -6,13 +6,13 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/20 05:11:51 by garm              #+#    #+#             */
-/*   Updated: 2014/03/27 05:17:12 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 19:30:52 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-#include "42sh.h"
+#include "ftsh.h"
 
 t_node		*ft_ast_add(t_node *tree, t_lex *elem, char side)
 {
@@ -75,4 +75,3 @@ void		ft_ast_destroy(t_node **ast)
 		ft_memdel((void **)ast);
 	}
 }
-

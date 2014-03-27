@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/02 14:18:55 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/26 20:31:28 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 19:15:20 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,24 @@
 #include "libft.h"
 #include "readline.h"
 
-static void			add_char(unsigned int key, t_entry *user);
-
-/*
-** Call the right func and print ascii characters
-*/
-
-static void			exe_key(t_entry *user, void (*f)(t_entry *))
+static t_key_func	g_func_tab[] =
 {
-	f(user);
-}
+	{RIGHT, &key_right},
+	{LEFT, &key_left},
+	{UP, &key_up},
+	{DOWN, &key_down},
+	{BACKSPACE, &key_backspace},
+	{DELETE, &key_delete},
+	{END, &key_end},
+	{HOME, &key_home},
+	{CTRL_E, &key_end},
+	{CTRL_A, &key_home},
+	{CTRL_B, &key_prev_word},
+	{CTRL_N, &key_next_word},
+	{0, NULL}
+};
 
-void				key_hook(unsigned int key, t_entry *user)
-{
-	int					i;
-	static t_key_func	func_tab[] =
-	{
-		{RIGHT, &key_right},
-		{LEFT, &key_left},
-		{UP, &key_up},
-		{DOWN, &key_down},
-		{BACKSPACE, &key_backspace},
-		{DELETE, &key_delete},
-		{END, &key_end},
-		{HOME, &key_home},
-		{CTRL_E, &key_end},
-		{CTRL_A, &key_home},
-		{CTRL_B, &key_prev_word},
-		{CTRL_N, &key_next_word},
-		{0, NULL}
-	};
-
-	i = 0;
-	while (func_tab[i].f != NULL)
-	{
-		if (func_tab[i].key == key)
-			exe_key(user, func_tab[i].f);
-		i++;
-	}
-	if (ft_isprint(key))
-		add_char(key, user);
-}
-
-/*
-** Add one characther to the user command at the cursor position
-*/
-
-static void			add_char(unsigned int key, t_entry *user)
+static void			add_one_char(unsigned int key, t_entry *user)
 {
 	int				i;
 
@@ -76,4 +47,24 @@ static void			add_char(unsigned int key, t_entry *user)
 	user->cursor++;
 	move_right(user);
 	put_cmd(user);
+}
+
+static void			exe_key(t_entry *user, void (*f)(t_entry *))
+{
+	f(user);
+}
+
+void				key_hook(unsigned int key, t_entry *user)
+{
+	int				i;
+
+	i = 0;
+	while (g_func_tab[i].f != NULL)
+	{
+		if (g_func_tab[i].key == key)
+			exe_key(user, g_func_tab[i].f);
+		i++;
+	}
+	if (ft_isprint(key))
+		add_one_char(key, user);
 }

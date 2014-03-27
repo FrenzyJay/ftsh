@@ -6,12 +6,12 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 07:13:19 by garm              #+#    #+#             */
-/*   Updated: 2014/03/25 19:55:45 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 19:27:22 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "42sh.h"
+#include "ftsh.h"
 
 static void			ft_set_tokval(t_tokval *tokval, t_tok token, char *value)
 {

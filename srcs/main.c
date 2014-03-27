@@ -6,14 +6,14 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:39:20 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 14:32:48 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 19:25:51 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <signal.h>
-#include "42sh.h"
+#include "ftsh.h"
 
 /*
 ** SINGLETON

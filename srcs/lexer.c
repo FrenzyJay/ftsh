@@ -6,13 +6,13 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 06:03:16 by garm              #+#    #+#             */
-/*   Updated: 2014/03/27 05:19:17 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 19:27:09 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-#include "42sh.h"
+#include "ftsh.h"
 
 char			*ft_strsuck(char **str, unsigned long len)
 {

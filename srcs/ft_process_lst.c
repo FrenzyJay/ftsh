@@ -6,13 +6,13 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 14:17:21 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/27 04:31:13 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 19:28:57 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "42sh.h"
+#include "ftsh.h"
 
 static void			ft_command_process(char **argv)
 {

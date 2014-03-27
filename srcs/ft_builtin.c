@@ -6,36 +6,20 @@
 /*   By: jvincent <jvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 20:59:38 by jvincent          #+#    #+#             */
-/*   Updated: 2014/03/27 13:39:52 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 20:13:18 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "42sh.h"
+#include "ftsh.h"
 
-/*
-** Built-in SET-ENV
-*/
-char	**ft_built_set_env(char **arg, char **env)
-{
-	(void)arg;
-	(void)env;
-	return (env);
-}
-
-/*
-** Built-in EXIT
-*/
 void	ft_exit(char **arg)
 {
 	(void)arg;
 	exit(0);
 }
 
-/*
-** Update the PWD and OLDPWD
-*/
 char	**update_pwd(char **env)
 {
 	char	*buffer;
@@ -52,9 +36,6 @@ char	**update_pwd(char **env)
 	return (env);
 }
 
-/*
-** Cmd "cd" : change the current directory
-*/
 char	**ft_cd(char **args, char **env)
 {
 	int		i;
@@ -72,29 +53,11 @@ char	**ft_cd(char **args, char **env)
 	}
 	else
 	{
-		if (access(args[1], F_OK) == -1)
-		{
-/*			ft_printf("no such directory : %s\n", args[1]);*/
-			ft_putstr("no such file\n");
-			free(home);
-			free(oldpwd);
+		if ((i = ft_permissions_cd(args, &home, &oldpwd)) == 1)
 			return (env);
-		}
-		if (access(args[1], X_OK) == -1)
-		{
-/*			ft_printf("Permission denied : %s\n", args[1]);*/
-			ft_putstr("permission denied\n");
-			free(home);
-			free(oldpwd);
-			return (env);
-		}
-		i = chdir(args[1]);
 	}
 	if (i < 0)
-	{
-/*		ft_printf("not a directory : %s\n", args[1]);*/
 		ft_putstr("not a dir\n");
-	}
 	else
 		env = update_pwd(env);
 	free(home);
@@ -102,9 +65,6 @@ char	**ft_cd(char **args, char **env)
 	return (env);
 }
 
-/*
-** Test and launch builtin
-*/
 int		ft_is_builtin(char **arg, t_shenv **env)
 {
 	if (!arg)
@@ -117,8 +77,9 @@ int		ft_is_builtin(char **arg, t_shenv **env)
 		ft_print_env((*env)->env);
 	else if (!ft_strequ(arg[0], "setenv"))
 		(*env)->env = ft_built_set_env(arg, (*env)->env);
+	else if (!ft_strequ(arg[0], "unsetenv"))
+		(*env)->env = ft_built_unset_env(arg, (*env)->env);
 	else
 		return (0);
 	return (1);
 }
-

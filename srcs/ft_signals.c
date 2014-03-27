@@ -6,13 +6,13 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/24 15:04:43 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/27 04:38:37 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 19:29:26 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <sys/wait.h>
-#include "42sh.h"
+#include "ftsh.h"
 
 static void	ft_sigchld(void)
 {

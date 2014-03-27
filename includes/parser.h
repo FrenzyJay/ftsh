@@ -6,7 +6,7 @@
 /*   By: garm <garm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 01:12:39 by garm              #+#    #+#             */
-/*   Updated: 2014/03/27 17:10:37 by garm             ###   ########.fr       */
+/*   Updated: 2014/03/27 19:19:00 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,47 +44,7 @@
 
 # define CHECK_PIPE(T) ((T) == tok_expr || TOK_IS_RE(T))
 
-typedef enum	e_tok
-{
-	tok_separator,
-	tok_uncompleted,
-	tok_expr,
-	tok_heredoc,
-	tok_read,
-	tok_write,
-	tok_append,
-	tok_cmd,
-	tok_arg,
-	tok_pipe,
-	tok_and,
-	tok_or,
-	tok_subsh,
-	tok_end,
-	tok_bg
-}				t_tok;
-
-typedef struct s_tokval
-{
-	t_tok	token;
-	char	*value;
-}				t_tokval;
-
-typedef struct	s_lex
-{
-	struct s_lex	*prev;
-	struct s_lex	*next;
-	t_tok			token;
-	char			*value;
-}				t_lex;
-
-typedef struct	s_node
-{
-	struct s_node	*left;
-	struct s_node	*right;
-	struct s_node	*parent;
-	t_tok			token;
-	char			*value;
-}				t_node;
+# include "struct.h"
 
 /*
 ** lexer.c
@@ -148,8 +108,6 @@ char	*ft_parser_check_error(t_node *ast);
 ** parser_ambiguous.c
 */
 char	*ft_parser_check_ambiguous(t_node *ast, char *errormsg, int state);
-/*char	*ft_parser_check_pipes(t_node *ast, char *errormsg, int state);*/
 
-
-#endif /* !PARSER_H */
+#endif
 

@@ -6,13 +6,13 @@
 /*   By: llapillo <llapillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 17:03:43 by llapillo          #+#    #+#             */
-/*   Updated: 2014/03/27 04:46:09 by jvincent         ###   ########.fr       */
+/*   Updated: 2014/03/27 19:29:47 by garm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "42sh.h"
+#include "ftsh.h"
 
 static void		ft_view_info_job(t_job *curs_j)
 {

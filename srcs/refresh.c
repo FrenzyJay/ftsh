@@ -6,7 +6,7 @@
 /*   By: jibanez <jibanez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/15 20:03:25 by jibanez           #+#    #+#             */
-/*   Updated: 2014/03/26 20:46:32 by jibanez          ###   ########.fr       */
+/*   Updated: 2014/03/27 19:41:48 by jibanez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,6 @@
 #include "libft.h"
 #include "readline.h"
 
-static void		clear(void);
-static void		replace_cursor(t_entry *user);
-
-/*
-** Add character key to *cmd and put it on the terminal
-*/
-
-void			put_cmd(t_entry *user)
-{
-	clear();
-	ft_putstr(user->current->cmd);
-	replace_cursor(user);
-}
-
-/*
-** Return the terminal cols number
-*/
-
 int				get_cols(void)
 {
 	struct ttysize	term;
@@ -41,10 +23,6 @@ int				get_cols(void)
 	ioctl(0, TIOCGWINSZ, &term);
 	return (term.ts_cols);
 }
-
-/*
-** Clear the actual entry
-*/
 
 static void		clear(void)
 {
@@ -54,10 +32,6 @@ static void		clear(void)
 	put_prompt();
 }
 
-/*
-** Replace the cursor..
-*/
-
 static void		replace_cursor(t_entry *user)
 {
 	int			i;
@@ -65,7 +39,14 @@ static void		replace_cursor(t_entry *user)
 	i = user->current->clen;
 	while (i > user->cursor)
 	{
-		move_left();
+		move_left(user);
 		i--;
 	}
+}
+
+void			put_cmd(t_entry *user)
+{
+	clear();
+	ft_putstr(user->current->cmd);
+	replace_cursor(user);
 }
